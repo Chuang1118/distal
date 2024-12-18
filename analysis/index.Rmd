@@ -1,0 +1,82 @@
+---
+title: "Home"
+site: workflowr::wflow_site
+output:
+  workflowr::wflow_html:
+    toc: false
+bibliography:
+    - "`r here::here('data/references/references.bib')`"
+---
+
+```{r organoid-img, out.width = "100%", fig.align = "center", echo = FALSE}
+knitr::include_graphics("../images/Cardon_bioRxiv.png")
+```
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14516944.svg)](https://zenodo.org/records/14516944)
+
+This website displays the analysis code and results for the paper: 
+Single cell profiling of circulating autoreactive CD4 T cells from patients with autoimmune liver diseases suggests tissue-imprinting[@Cardon2024-bv].
+Throughout the paper, following previous studies[@Renand2020-jh], focusing on
+establishing the link between the self-antigen-specific CD4 T cell response and 
+that in the targeted tissue is a difficult and under-researched task in autoimmune liver diseases.
+
+Follow the links below to access the different stages of analysis or refer to
+the [Getting started](getting-started.html) page for more details about the
+dataset and how to reproduce the analysis.
+
+Analysis
+========
+
+* [Figure 2](02-fig2.html) - Single-cell RNA sequencing of 
+  liver-self-antigens specific CD4 T cells.
+* [Figure 3](05-fig3.html) - Tracking TCR clonotypes between 
+  liver biopsies and circulating CD4 T cell subsets.
+* [Figure 4](03-fig4.html) - Single cell transcriptomic analysis 
+  of unstimulated Sepsecs-specific CD4 T cells.
+* [Supplementary figure 2](04-suppfig2.html) - Characterization of 
+  the cluster 7 of PDCE2-specific CD4 T cells
+* [Supplementary figure 4](06-suppfig4.html) - Literature-based-gene 
+  set score analysis of cells from clusters identified in the figure 2F.
+* [Supplementary figure 10](05-fig3.html#Supplementary_figure_10) - Single cell gene expression heatmap for
+  top 5 marker genes of PD-1+ CXCR5- memory CD4 T cells.
+* [Supplementary figure 11](05-fig3.html#Supplementary_figure_11) - Unsupervised azimuth annotation of 
+  scRNA-seq data from PD-1+ CXCR5- memory CD4 T cell subsets.
+* [Supplementary figure 12](05-fig3.html#Supplementary_figure_12) - Literature-based-gene set score analysis of 
+  cells from clusters identified in the figure 3.
+* [Supplementary figure 14](07-suppfig14.html) - Literature-based-gene set score analysis 
+  of Tetramer positive or negative cells identified in the figure 4.
+
+  
+[Methods](90-methods.html) - Description of methods used during the analysis.
+
+Citations
+=========
+
+This website and the analysis code can be cited as:
+
+> @Cardon2024-bv Single cell profiling of circulating autoreactive CD4 T cells from patients with autoimmune liver diseases suggests tissue-imprinting.
+> DOI: [10.1101/2024.03.26.586770][bioRxiv]
+
+The data files associated with this analysis can be cited as:
+
+> @Cardon2024-bv
+> DOI: [https://doi.org/10.5281/zenodo.14516943][Zenodo]<br />
+> @Attaf2020-fi
+> DOI: [https://doi.org/10.3389/fimmu.2020.00216][fb5pseq]
+
+
+If you use this data in an analysis please cite the publications that originally
+described it.
+
+References
+==========
+
+<div id="refs"></div>
+
+[bioRxiv]: https://www.biorxiv.org/content/10.1101/2024.03.26.586770v3 "bioRxiv"
+[zenodo]: https://doi.org/10.5281/zenodo.14516943 "Zenodo"
+[fb5pseq]: https://doi.org/10.3389/fimmu.2020.00216 "fb5pseq"
+
+```{r session-info, eval = FALSE}
+devtools::session_info()
+```

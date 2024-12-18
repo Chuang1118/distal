@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Figure 3</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DISTAL Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="getting-started.html">Getting started</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="02-fig2.html">Figure 2</a>
+    </li>
+    <li>
+      <a href="05-fig3.html">Figure 3</a>
+    </li>
+    <li>
+      <a href="03-fig4.html">Figure 4</a>
+    </li>
+    <li>
+      <a href="04-suppfig2.html">Supplementary figure 2</a>
+    </li>
+    <li>
+      <a href="06-suppfig4.html">Supplementary figure 4</a>
+    </li>
+    <li>
+      <a href="05-fig3.html#Supplementary_figure_10">Supplementary figure 10</a>
+    </li>
+    <li>
+      <a href="05-fig3.html#Supplementary_figure_11">Supplementary figure 11</a>
+    </li>
+    <li>
+      <a href="05-fig3.html#Supplementary_figure_12">Supplementary figure 12</a>
+    </li>
+    <li>
+      <a href="07-suppfig14.html">Supplementary figure 14</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Reports
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="cellranger_web_summary.html">Cell Ranger</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="90-methods.html">Methods</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="license.html">License</a>
+</li>
+<li>
+  <a href="https://github.com/Chuang1118/FB5P-seq">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Figure 3</h1>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2024-12-18
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong> <code>proj_distal/analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version 1.7.1). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed12345code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(12345)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed12345code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(12345)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongnoversioncontrol"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>Repository version:</strong> no version control </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongnoversioncontrol" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Tracking code development and connecting the code version to the results is critical for reproducibility. To start using Git, open the Terminal and type <code>git init</code> in your project directory.</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+This project is not being versioned with Git. To obtain the full reproducibility benefits of using workflowr, please see <code>?wflow_start</code>.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code># scRNA-seq
+library(Seurat)
+#packageVersion(&quot;Seurat&quot;)
+
+# Plotting
+library(&quot;ggplot2&quot;)
+
+# Presentation
+library(&quot;knitr&quot;)
+
+# Others
+library(&quot;rstatix&quot;)
+library(&#39;scales&#39;)
+library(&quot;readxl&quot;)</code></pre>
+<pre class="r"><code>source(here::here(&quot;R/00_generalDeps.R&quot;))
+source(here::here(&quot;R/output.R&quot;))</code></pre>
+<!-- # ```{r depends-paths} -->
+<!-- # filt_path <- here::here("data/processed/AmR053_harmony_azimuth_V4regRB.rds") -->
+<!-- # ``` -->
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>In this document we are going to perform clustering and plotting figure 3 panel B C &amp; E, Supplementary figure 5 and Supplementary figure 6 using <code>Seurat</code>.</p>
+</div>
+<div id="seurat--integration-by-harmony" class="section level1">
+<h1>Seurat -Integration by harmony</h1>
+<div id="parse-tcr" class="section level2">
+<h2>Parse TCR</h2>
+<pre class="r"><code>#   # Function parser TCR cellRanger output
+#   # Add Clonotypes functions
+#    add_clonotype &lt;- function(tcr_prefix, seurat_obj, type,num){
+#     vdj_file=file.path(tcr_prefix,&quot;filtered_contig_annotations.csv&quot;)
+#     if(file.exists(vdj_file)){ 
+#       res &lt;- tryCatch({
+#         tcr &lt;- read.csv(vdj_file)
+#         
+#         # Extract all informations of V(d)J and c genes per barcode
+#         if(type ==&#39;b&#39;){
+#           tcr &lt;- as.data.frame(format_b_line(tcr))
+#         } else if (type == &#39;t&#39;){
+#           tcr &lt;- as.data.frame(format_t_line(tcr))
+#         }
+#         
+#         # Clonotype-centric info.
+#         clono &lt;- read.csv(paste(tcr_prefix,&quot;clonotypes.csv&quot;, sep=&quot;/&quot;))
+#         clono &lt;- clono[, c(&quot;clonotype_id&quot;, &quot;cdr3s_aa&quot;, &quot;proportion&quot;)]
+#         colnames(clono) &lt;- paste(type, colnames(clono), sep=&quot;_&quot;)
+#         # Slap the AA sequences onto our original table by clonotype_id.
+#         tcr &lt;- merge(tcr, clono,by.x=&#39;clonotype_ID&#39;, by.y=paste(type,&#39;clonotype_id&#39;,sep=&#39;_&#39;))
+#         row.names(tcr) &lt;- paste(tcr$barcode,&#39;_&#39;,num,sep=&#39;&#39;)
+#         tcr$barcode &lt;- NULL
+#         # Add to the Seurat object&#39;s metadata.
+#         clono_seurat &lt;- AddMetaData(object=seurat_obj, metadata=tcr)
+#         return(clono_seurat)
+#       }, error =  function(e) {
+#         print(e)
+#         return(seurat_obj)
+#       })
+#     } else {
+#       print(paste(&#39;Cannot find file : &#39;,vdj_file))
+#     }
+#     return(seurat_obj)
+#   }
+#   
+#   #Function format TCR output
+#   format_t_line &lt;- function(tcr){
+#     list_barcode &lt;- unique(tcr$barcode)
+#     vdj_list &lt;- c()
+#     for(barcode in unique(tcr$barcode)){
+#       list_bc &lt;- tcr[tcr$barcode==barcode,]
+#       clonoID &lt;- unique(list_bc$raw_clonotype_id)
+#       TCRID &lt;- paste(paste(list_bc$chain,paste(list_bc$v_gene,list_bc$d_gene,list_bc$j_gene,list_bc$c_gene,sep=&#39;;&#39;),sep=&#39;:&#39;),collapse=&#39; &#39;)
+#       TR_list &lt;- list()
+#       TR_list[[&#39;TRA&#39;]] &lt;- list_bc$chain[list_bc$chain==&#39;TRA&#39;]
+#       TR_list[[&#39;TRAV&#39;]] &lt;- list_bc$v_gene[list_bc$chain==&#39;TRA&#39;  &amp; list_bc$v_gene!=&#39;&#39; ]
+#       TR_list[[&#39;TRAD&#39;]] &lt;- list_bc$d_gene[list_bc$chain==&#39;TRA&#39; &amp; list_bc$d_gene!=&#39;&#39; ]
+#       TR_list[[&#39;TRAJ&#39;]] &lt;- list_bc$j_gene[list_bc$chain==&#39;TRA&#39; &amp; list_bc$j_gene!=&#39;&#39; ]
+#       TR_list[[&#39;TRAC&#39;]]&lt;- list_bc$c_gene[list_bc$chain==&#39;TRA&#39; &amp; list_bc$c_gene!=&#39;&#39; ]
+#       
+#       TR_list[[&#39;TRB&#39;]] &lt;- list_bc$chain[list_bc$chain==&#39;TRB&#39;]
+#       TR_list[[&#39;TRBV&#39;]] &lt;- list_bc$v_gene[list_bc$chain==&#39;TRB&#39;  &amp; list_bc$v_gene!=&#39;&#39; ]
+#       TR_list[[&#39;TRBD&#39;]] &lt;- list_bc$d_gene[list_bc$chain==&#39;TRB&#39; &amp; list_bc$d_gene!=&#39;&#39; ]
+#       TR_list[[&#39;TRBJ&#39;]] &lt;- list_bc$j_gene[list_bc$chain==&#39;TRB&#39; &amp; list_bc$j_gene!=&#39;&#39; ]
+#       TR_list[[&#39;TRBC&#39;]]&lt;- list_bc$c_gene[list_bc$chain==&#39;TRB&#39; &amp; list_bc$c_gene!=&#39;&#39; ]
+#       
+#       TR_list_out &lt;- c()
+#       names_out &lt;- c()
+#       for(tr in names(TR_list)){
+#         if(length(TR_list[[tr]])==1){
+#           TR_list_out &lt;- c(TR_list_out,TR_list[[tr]][1],NA)
+#         } else if (length(TR_list[[tr]])==0){
+#           TR_list_out &lt;- c(TR_list_out,NA,NA)
+#         } else {
+#           TR_list_out &lt;- c(TR_list_out,TR_list[[tr]])
+#         }
+#         names_out &lt;- c(names_out,paste(tr,c(&#39;1&#39;,&#39;2&#39;),sep=&#39;_&#39;))
+#         names(TR_list_out) &lt;- names_out
+#       }
+#       
+#       vdj_list &lt;- rbind(vdj_list,c(&#39;barcode&#39;=barcode,&#39;TCR_ID&#39;=TCRID,TR_list_out,&#39;clonotype_ID&#39;=clonoID))
+#       
+#     }
+#     return(vdj_list)
+#   }</code></pre>
+</div>
+<div id="load-matrices" class="section level2">
+<h2>Load matrices</h2>
+<pre class="r"><code># # Load Matrices and remove TCR genes from it
+# mat_v1&lt;-Read10X(data.dir=&quot;CellRanger/AmR053_V1_Multi/sample_filtered_feature_bc_matrix&quot;,gene.column=2,unique.features=TRUE)
+# colnames(mat_v1)&lt;-paste(colnames(mat_v1),&#39;1&#39;,sep=&#39;_&#39;)
+# mat_v1 &lt;- mat_v1[grep(&quot;^TRA[JV]|^TRB[JV]|^TRG[JV]|^TRD[JV]&quot;,row.names(mat_v1),invert=TRUE),]
+# mat_v2&lt;-Read10X(data.dir=&#39;CellRanger/AmR053_V2_Multi/sample_filtered_feature_bc_matrix&#39;,gene.column=2,unique.features=TRUE)
+# colnames(mat_v2)&lt;-paste(colnames(mat_v2),&#39;2&#39;,sep=&#39;_&#39;)
+# mat_v2 &lt;- mat_v2[grep(&quot;^TRA[JV]|^TRB[JV]|^TRG[JV]|^TRD[JV]&quot;,row.names(mat_v2),invert=TRUE),]
+# mat_v3&lt;-Read10X(data.dir=&#39;CellRanger/AmR053_V3_Multi/sample_filtered_feature_bc_matrix&#39;,gene.column=2,unique.features=TRUE)
+# colnames(mat_v3)&lt;-paste(colnames(mat_v3),&#39;3&#39;,sep=&#39;_&#39;)
+# mat_v3 &lt;- mat_v3[grep(&quot;^TRA[JV]|^TRB[JV]|^TRG[JV]|^TRD[JV]&quot;,row.names(mat_v3),invert=TRUE),]
+# mat_v4&lt;-Read10X(data.dir=&#39;CellRanger/AmR053_V4_Multi/sample_filtered_feature_bc_matrix&#39;,gene.column=2,unique.features=TRUE)
+# colnames(mat_v4)&lt;-paste(colnames(mat_v4),&#39;4&#39;,sep=&#39;_&#39;)
+# mat_v4 &lt;- mat_v4[grep(&quot;^TRA[JV]|^TRB[JV]|^TRG[JV]|^TRD[JV]&quot;,row.names(mat_v4),invert=TRUE),]</code></pre>
+</div>
+<div id="setup-the-seurat-object" class="section level2">
+<h2>Setup the Seurat Object</h2>
+<pre class="r"><code># # Create Seurat objects from matrices and add TCR metadata
+# amr_v1 &lt;- CreateSeuratObject(counts = mat_v1, project = &quot;AmR053_V1&quot;, min.cell=3,min.features=200)
+# amr_v1$samples &lt;- &#39;V1&#39;
+# amr_v1 &lt;- add_clonotype(&#39;CellRanger/AmR053_V1_Multi/vdj_t&#39;, amr_v1, &quot;t&quot;,&#39;1&#39;)
+# amr_v2 &lt;- CreateSeuratObject(counts = mat_v2, project = &quot;AmR053_V2&quot;, min.cell=3,min.features=200)
+# amr_v2$samples &lt;- &#39;V2&#39;
+# amr_v2 &lt;- add_clonotype(&#39;CellRanger/AmR053_V2_Multi/vdj_t&#39;, amr_v2, &quot;t&quot;,&#39;2&#39;)
+# amr_v3 &lt;- CreateSeuratObject(counts = mat_v3, project = &quot;AmR053_V3&quot;, min.cell=3,min.features=200)
+# amr_v3$samples &lt;- &#39;V3&#39;
+# amr_v3 &lt;- add_clonotype(&#39;CellRanger/AmR053_V3_Multi/vdj_t&#39;, amr_v3, &quot;t&quot;,&#39;3&#39;)
+# amr_v4 &lt;- CreateSeuratObject(counts = mat_v4, project = &quot;AmR053_V4&quot;, min.cell=3,min.features=200)
+# amr_v4$samples &lt;- &#39;V4&#39;
+# amr_v4&lt;- add_clonotype(&#39;CellRanger/AmR053_V4_Multi/vdj_t&#39;, amr_v4, &quot;t&quot;,&#39;4&#39;)
+# amr_list &lt;- list(&#39;v1&#39;=amr_v1, &#39;v2&#39;=amr_v2,&#39;v3&#39;=amr_v3,&#39;v4&#39;=amr_v4)</code></pre>
+</div>
+<div id="integration" class="section level2">
+<h2>Integration</h2>
+<pre class="r"><code># for(v in names(amr_list)){
+#         # Remove doublet based on TCR annotation
+#         #amr_list[[v]][[&#39;doubletTCR&#39;]] &lt;- !(is.na(amr_list[[v]][[&#39;TRA_2&#39;]]) &amp; is.na(amr_list[[v]][[&#39;TRB_2&#39;]]))
+#         # Add mitochondrial genes percentage
+#         amr_list[[v]][[&#39;percent.mt&#39;]] &lt;- PercentageFeatureSet(amr_list[[v]],pattern=&quot;^[MTmt]{2}-&quot;)
+#         # Add rebosomal genes percentage
+#         amr_list[[v]][[&#39;percent.rb&#39;]] &lt;- PercentageFeatureSet(amr_list[[v]],pattern=&quot;^RP[SL][[:digit:]]|^RPLP[[:digit:]]|^RPSA&quot;)
+#         # Subset object on number of genes per cells and TCR doublet
+#         amr_list[[v]] &lt;-subset(amr_list[[v]],subset=nFeature_RNA &gt; 500 &amp; nFeature_RNA &lt; 4000 &amp; percent.mt &lt; 5)# &amp; doubletTCR==FALSE)
+#         # Normalise counts and regress on precentage of ribosomal genes
+#         amr_list[[v]] &lt;- SCTransform(amr_list[[v]], vars.to.regress = &quot;percent.rb&quot;, verbose = FALSE)
+# }
+# # Calculate integration features
+# integ_feat &lt;- SelectIntegrationFeatures(amr_list, nfeatures=3000)
+# # Merge the four matrices
+# amr_all &lt;- merge(amr_list[[&#39;v1&#39;]], y=c(amr_list[[&#39;v2&#39;]],amr_list[[&#39;v3&#39;]],amr_list[[&#39;v4&#39;]]), project =&#39;AMR053&#39;)
+# # Integrate all data set with harmony
+# VariableFeatures(amr_all) &lt;- integ_feat
+# amr_all &lt;- RunPCA(amr_all, assay = &quot;SCT&quot;, npcs = 50)
+# amr.harmony &lt;- RunHarmony(amr_all,&quot;samples&quot;, assay.use=&#39;SCT&#39;,plot_convergence = FALSE)</code></pre>
+</div>
+<div id="clustering" class="section level2">
+<h2>Clustering</h2>
+<pre class="r"><code># # Calculate clusters with resolution of 0.3
+# reso=0.3
+# amr.harmony &lt;- FindNeighbors(amr.harmony, reduction = &quot;harmony&quot;, dims = 1:13)
+# amr.harmony &lt;- FindClusters(amr.harmony, resolution = reso,graph.name=&#39;SCT_snn&#39;)
+# amr.harmony &lt;- RunUMAP(amr.harmony, reduction = &quot;harmony&quot;, assay = &#39;SCT&#39;,dims = 1:13,seed.use=42)
+# amr.harmony.umap &lt;- DimPlot(amr.harmony, reduction = &quot;umap&quot;, group.by = &quot;seurat_clusters&quot;, pt.size = .1,ncol=2, label=TRUE, seed=42)
+# umaps &lt;- amr.harmony.umap</code></pre>
+</div>
+<div id="markers-hm" class="section level2">
+<h2>Markers HM</h2>
+<pre class="r"><code># #Indentify marker genes for each cluster
+# DefaultAssay(amr.harmony) &lt;- &#39;SCT&#39;
+# amr.harmony&lt;-ScaleData(amr.harmony, features = row.names(amr.harmony))
+# amr.harmony &lt;- PrepSCTFindMarkers(amr.harmony, assay = &quot;SCT&quot;, verbose = TRUE)
+# amr.harmony.mkrs &lt;-  FindAllMarkers(amr.harmony, only.pos = TRUE, min.pct = 0.25, logfc.threshold = 0.25)
+# amr.harmony.mkrs_padj &lt;- amr.harmony.mkrs[amr.harmony.mkrs$p_val_adj &lt;0.01 ,]
+# amr.harmony.mkrs_padj %&gt;% group_by(cluster) %&gt;% top_n(n = 5, wt = avg_log2FC) -&gt; top5
+# heatmap.mkrs &lt;- DoHeatmap(amr.harmony, features=top5$gene, group.by=&#39;seurat_clusters&#39;)</code></pre>
+</div>
+<div id="markers-dp" class="section level2">
+<h2>Markers DP</h2>
+<pre class="r"><code># list_feat=c(&#39;MAL&#39;,&#39;AQP3&#39;,&#39;TCF7&#39;,&#39;CCL5&#39;,&#39;GZMK&#39;,&#39;GZMA&#39;,&#39;HLA-DRA&#39;,&#39;LGALS1&#39;,&#39;CXCR3&#39;,&#39;NKG7&#39;,&#39;GZMH&#39;,&#39;PLEK&#39;,&#39;HIST1H1E&#39;,&#39;HIST1H1D&#39;,&#39;COTL1&#39;,&#39;GNLY&#39;,&#39;GZMB&#39;,&#39;PRF1&#39;,&#39;FOXP3&#39;,&#39;IKZF2&#39;,&#39;RTKN2&#39;,&#39;XIST&#39;,&#39;NEAT1&#39;,&#39;MACF1&#39;,&#39;AL627171.2&#39;,&#39;PLCG2&#39;,&#39;MT-ND6&#39;)
+# dot.mkrs &lt;- DotPlot(amr.harmony,features=list_feat, cols=&#39;RdBu&#39;, dot.scale=12) + RotatedAxis() + ggtitle(&quot;Marker genes&quot;) + ylab(&#39;Clusters&#39;)</code></pre>
+</div>
+<div id="module-score" class="section level2">
+<h2>Module score</h2>
+</div>
+<div id="ms-violin" class="section level2">
+<h2>MS violin</h2>
+</div>
+<div id="azimuth" class="section level2">
+<h2>Azimuth</h2>
+<pre class="r"><code># #Cluster annotation with azimuth, load azimuth annotation from previous run v0.4.6
+# DefaultAssay(amr.harmony) &lt;- &#39;SCT&#39;
+# Idents(amr.harmony) &lt;- &#39;seurat_clusters&#39;
+# amr.harmony &lt;- RunAzimuth(amr.harmony, reference = &quot;pbmcref&quot;, assay=&#39;SCT&#39;)
+# azm_plot &lt;- DimPlot(amr.harmony, reduction=&#39;umap&#39;, split.by=&#39;predicted.celltype.l2&#39;,ncol=5,seed=42)</code></pre>
+</div>
+<div id="saving" class="section level2">
+<h2>Saving</h2>
+<pre class="r"><code># saveRDS(amr.harmony,file=here::here(&quot;data/processed/AmR053_harmony_azimuth_V4regRB.rds&quot;))</code></pre>
+<pre class="r"><code>filt_path &lt;- here::here(&quot;data/processed/AmR053_harmony_azimuth_V4regRB.rds&quot;)</code></pre>
+<p>Loading <code>seurat</code> object processed</p>
+<pre class="r"><code>if (file.exists(filt_path)) {
+    amr.harmony &lt;- readRDS(filt_path)
+} else {
+    stop(&quot;Figure 3  dataset is missing. &quot;,
+         &quot;Please check Input first.&quot;,
+         call. = FALSE)
+}</code></pre>
+</div>
+</div>
+<div id="figure-3" class="section level1">
+<h1>Figure 3</h1>
+<div id="panel-b" class="section level2">
+<h2>Panel B</h2>
+<pre class="r"><code>fig &lt;- DimPlot(amr.harmony, reduction = &quot;umap&quot;, seed=42, group.by = &quot;seurat_clusters&quot;, pt.size = .1,ncol=1, label=TRUE) + ggtitle(paste0(&quot;seurat_clusters: &quot;, length(amr.harmony$seurat_clusters)))
+
+dir.create(here::here(&quot;output&quot;, DOCNAME), showWarnings = FALSE)
+
+ggsave(here::here(&quot;output&quot;, DOCNAME, &quot;figure3-panelB.pdf&quot;), fig,
+        width = 7, height = 6, scale = 1)
+ggsave(here::here(&quot;output&quot;, DOCNAME, &quot;figure3-panelB.png&quot;), fig,
+        width = 7, height = 6, scale = 1)
+
+fig</code></pre>
+<p><img src="figure/05-fig3.Rmd/fig3-pB-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="panel-c" class="section level2">
+<h2>Panel C</h2>
+<pre class="r"><code>DefaultAssay(amr.harmony) &lt;- &#39;SCT&#39;
+amr.harmony.mkrs &lt;-  FindAllMarkers(amr.harmony,assay=&#39;SCT&#39;, only.pos = TRUE, min.pct = 0.25, logfc.threshold = 0.25)
+amr.harmony.mkrs_padj &lt;- amr.harmony.mkrs[amr.harmony.mkrs$p_val_adj &lt;0.01 ,]
+
+list_feat&lt;- c()
+for(clust in unique(amr.harmony.mkrs_padj$cluster)){
+  top_gene &lt;- subset(amr.harmony.mkrs_padj,cluster==clust)$gene
+  list_feat &lt;- c(list_feat,head(top_gene[!top_gene %in% list_feat],3))
+}
+
+DotPlot(amr.harmony, features=list_feat, cols=&#39;RdBu&#39;) + RotatedAxis() + ggtitle(&quot;Marker genes&quot;) + ylab(&#39;Clusters&#39;) +theme(axis.text.x = element_text(angle = 90, hjust=1))</code></pre>
+<p><img src="figure/05-fig3.Rmd/fig3-pC-1.png" width="864" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>list_feat=c(&#39;MAL&#39;,&#39;GZMK&#39;, &#39;CCL5&#39;,&#39;DUSP2&#39;,&#39;HLA-DRA&#39;,&#39;LGALS1&#39;,&#39;CXCR3&#39;,&#39;HLA-DRB1&#39;,&#39;NKG7&#39;,&#39;GZMH&#39;,&#39;CST7&#39;,&#39;HIST1H1E&#39;,&#39;HIST1H1D&#39;,&#39;HIST1H1C&#39;,&#39;GNLY&#39;,&#39;GZMB&#39;,&#39;FGFBP2&#39;,&#39;FOXP3&#39;,&#39;IKZF2&#39;,&#39;RTKN2&#39;,&#39;NEAT1&#39;,&#39;XIST&#39;,&#39;MACF1&#39;,&#39;AL627171.2&#39;,&#39;PLCG2&#39;)
+
+fig &lt;- DotPlot(amr.harmony, features=list_feat, cols=&#39;RdBu&#39;) + RotatedAxis() + ggtitle(&quot;Marker genes&quot;) + ylab(&#39;Clusters&#39;) +theme(axis.text.x = element_text(angle = 90, hjust=1))
+
+dir.create(here::here(&quot;output&quot;, DOCNAME), showWarnings = FALSE)
+
+ggsave(here::here(&quot;output&quot;, DOCNAME, &quot;figure3-panelC.pdf&quot;), fig,
+        width = 9, height = 6, scale = 1)
+ggsave(here::here(&quot;output&quot;, DOCNAME, &quot;figure3-panelC.png&quot;), fig,
+        width = 9, height = 6, scale = 1)
+
+fig</code></pre>
+<p><img src="figure/05-fig3.Rmd/fig3-pC-2.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="panel-e" class="section level2">
+<h2>Panel E</h2>
+<pre class="r"><code>DefaultAssay(amr.harmony) &lt;- &#39;SCT&#39;
+#Genes module autoreactivity
+my_data &lt;- read_excel(paste0(here::here(&quot;data/processed/amR053_List_features_genes_Update_11092024.xlsx&quot;)), sheet = &quot;autoreact&quot;, col_names = F)
+colnames(my_data) &lt;- &#39;autoreact&#39;
+amr.harmony &lt;- AddModuleScore(amr.harmony, features=list(my_data$autoreact), name=&#39;auto_reactivity&#39;, search=TRUE)
+#Genes module H1N1
+my_data &lt;- read_excel(paste0(here::here(&quot;data/processed/amR053_List_features_genes_Update_11092024.xlsx&quot;)), sheet = &quot;h1n1&quot;, col_names = F)
+colnames(my_data) &lt;- &#39;h1n1&#39;
+amr.harmony &lt;- AddModuleScore(amr.harmony, features=list(my_data$h1n1), name=&#39;H1N1&#39;, search=TRUE)
+
+# Feature plot auto reactivity highlight top 5%
+top95p_auto &lt;- tail(quantile(t(amr.harmony[[paste(&#39;auto_reactivity&#39;,&#39;1&#39;,sep=&#39;&#39;)]]),seq(0,1,0.05)),2)[1]
+top_cells &lt;- colnames(amr.harmony)[t(amr.harmony[[paste(&#39;auto_reactivity&#39;,&#39;1&#39;,sep=&#39;&#39;)]]) &gt; top95p_auto]
+pt_size_set &lt;- rep(0.01, dim(amr.harmony)[2])
+names(pt_size_set) &lt;- colnames(amr.harmony)
+pt_size_set[top_cells] &lt;- 1
+ft_modlist_auto &lt;-FeaturePlot(amr.harmony, features=paste(&#39;auto_reactivity&#39;,&#39;1&#39;,sep=&#39;&#39;), label=TRUE, pt.size=pt_size_set) + scale_colour_gradientn(colours=rev(brewer.pal(n=11, name=&quot;RdBu&quot;))) + labs(title = &quot;&quot;, subtitle = &quot;Gene set score:\nauto-reactivity&quot;) + theme(plot.subtitle = element_text(size = 12))
+#ft_modlist_auto
+
+# Feature plot H1N1 highlight top 5%
+top95p_h1n1 &lt;- tail(quantile(t(amr.harmony[[paste(&#39;H1N1&#39;,&#39;1&#39;,sep=&#39;&#39;)]]),seq(0,1,0.05)),2)[1]
+top_cells &lt;- colnames(amr.harmony)[t(amr.harmony[[paste(&#39;H1N1&#39;,&#39;1&#39;,sep=&#39;&#39;)]]) &gt; top95p_h1n1]
+pt_size_set &lt;- rep(0.01, dim(amr.harmony)[2])
+names(pt_size_set) &lt;- colnames(amr.harmony)
+pt_size_set[top_cells] &lt;- 1
+ft_modlist_h1n1 &lt;- FeaturePlot(amr.harmony, features=paste(&#39;H1N1&#39;,&#39;1&#39;,sep=&#39;&#39;), label=TRUE, pt.size=pt_size_set) + scale_colour_gradientn(colours=rev(brewer.pal(n=11, name=&quot;RdBu&quot;))) + labs(title = &quot;&quot;, subtitle = &quot;Gene set score:\nH1N1&quot;) +
+  theme(plot.subtitle = element_text(size = 12))
+#ft_modlist_h1n1
+
+# List module score  violin Plot pairwise wilcoxon test
+#AutoReactivity
+liste_auto &lt;- amr.harmony[[c(&#39;auto_reactivity1&#39;,&#39;seurat_clusters&#39;)]]
+names(liste_auto) &lt;- c(&#39;mod_score&#39;,&#39;clusters&#39;)
+pwWlcx_auto &lt;- pairwise_wilcox_test(liste_auto,formula=mod_score ~ clusters,p.adjust.method = &quot;BH&quot;)
+pwWlcx_auto_f =  pwWlcx_auto[pwWlcx_auto$group1 %in% c(2,6)| pwWlcx_auto$group2 %in% c(2,6), ]
+
+mod_plot_auto &lt;-  ggviolin(liste_auto, x=&#39;clusters&#39;, y=&#39;mod_score&#39;,palette=hue_pal()(10), fill=&#39;clusters&#39;) + 
+stat_pvalue_manual(pwWlcx_auto_f, hide.ns = FALSE, y.position=0.5, step.increase=0.05) + ggtitle(&#39;Auto Reactivity&#39;)+ theme(legend.position = &#39;none&#39;) + xlab(&quot;scRNA-seq clusters&quot;) + ylab(&quot;Gene set score&quot;)
+
+#H1N1
+liste_h1n1 &lt;- amr.harmony[[c(&#39;H1N11&#39;,&#39;seurat_clusters&#39;)]]
+names(liste_h1n1) &lt;- c(&#39;mod_score&#39;,&#39;clusters&#39;)
+pwWlcx_h1n1 &lt;- pairwise_wilcox_test(liste_h1n1,formula=mod_score ~ clusters,p.adjust.method = &quot;BH&quot;)
+pwWlcx_h1n1_f =  pwWlcx_h1n1[pwWlcx_h1n1$group1 %in% c(3,5)| pwWlcx_h1n1$group2 %in% c(3,5), ]
+
+
+mod_plot_h1n1 &lt;-  ggviolin(liste_h1n1, x=&#39;clusters&#39;, y=&#39;mod_score&#39;,palette=hue_pal()(10), fill=&#39;clusters&#39;) + 
+stat_pvalue_manual(pwWlcx_h1n1_f, hide.ns = FALSE, y.position=0.5, step.increase=0.05) + ggtitle(&#39;H1N1&#39;) + theme(legend.position = &#39;none&#39;) + xlab(&quot;scRNA-seq clusters&quot;) + ylab(&quot;Gene set score&quot;)
+
+
+fig &lt;- plot_grid(ft_modlist_auto,ft_modlist_h1n1, mod_plot_auto, mod_plot_h1n1,  nrow = 2, labels = &quot;E&quot;)
+
+dir.create(here::here(&quot;output&quot;, DOCNAME), showWarnings = FALSE)
+
+ggsave(here::here(&quot;output&quot;, DOCNAME, &quot;figure3-panelE.pdf&quot;), fig,
+        width = 12, height = 10, scale = 1)
+ggsave(here::here(&quot;output&quot;, DOCNAME, &quot;figure3-panelE.png&quot;), fig,
+        width = 12, height = 10, scale = 1)
+
+fig</code></pre>
+<p><img src="figure/05-fig3.Rmd/fig3-pE-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="supplementary-figure-10" class="section level1">
+<h1>Supplementary figure 10</h1>
+<pre class="r"><code>#Indentify marker genes for each cluster
+amr.harmony.mkrs_padj %&gt;% group_by(cluster) %&gt;% top_n(n = 5, wt = avg_log2FC) -&gt; top5
+
+#amr.harmony.mkrs_padj %&gt;% group_by(cluster) %&gt;% top_n(n = 5, wt = avg_log2FC) -&gt; top5
+#heatmap.mkrs &lt;- DoHeatmap(amr.harmony, features=top5$gene, group.by=&#39;seurat_clusters&#39;)
+
+
+
+# fig &lt;- DoHeatmap(amr.harmony, features=top5$gene, group.by=&#39;seurat_clusters&#39;, assay = &#39;SCT&#39;, label = F)
+# more than 30k cells, https://github.com/satijalab/seurat/issues/2724
+DoHeatmap(subset(amr.harmony, downsample = 5000), 
+          features=top5$gene,  group.by=&#39;seurat_clusters&#39;,
+                  assay = &quot;SCT&quot;)</code></pre>
+<p><img src="figure/05-fig3.Rmd/suppfig10-1.png" width="864" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>fig &lt;- DoHeatmap(subset(amr.harmony, downsample = 5000), 
+          features=list_feat,  group.by=&#39;seurat_clusters&#39;,
+                  assay = &quot;SCT&quot;)
+
+
+dir.create(here::here(&quot;output&quot;, DOCNAME), showWarnings = FALSE)
+
+ggsave(here::here(&quot;output&quot;, DOCNAME, &quot;suppfigure10.pdf&quot;), fig,
+        width = 9, height = 10, scale = 1)
+ggsave(here::here(&quot;output&quot;, DOCNAME, &quot;suppfigure10.png&quot;), fig,
+        width = 9, height = 10, scale = 1)
+
+fig</code></pre>
+<p><img src="figure/05-fig3.Rmd/suppfig10-2.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="supplementary-figure-11" class="section level1">
+<h1>Supplementary figure 11</h1>
+<pre class="r"><code>Idents(amr.harmony) &lt;- &#39;predicted.celltype.l2&#39;
+fig &lt;- DimPlot(amr.harmony, split.by=&#39;predicted.celltype.l2&#39;,ncol=4,seed=42)
+
+dir.create(here::here(&quot;output&quot;, DOCNAME), showWarnings = FALSE)
+
+ggsave(here::here(&quot;output&quot;, DOCNAME, &quot;suppfigure11.pdf&quot;), fig,
+        width = 10, height = 9, scale = 1)
+ggsave(here::here(&quot;output&quot;, DOCNAME, &quot;suppfigure11.png&quot;), fig,
+        width = 10, height = 9, scale = 1)
+
+fig</code></pre>
+<p><img src="figure/05-fig3.Rmd/suppfig11-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="supplementary-figure-12" class="section level1">
+<h1>Supplementary figure 12</h1>
+<pre class="r"><code>ft_modlist = list()
+mod_plot_list = list()
+for (sname in c(&quot;Poon_2022_Lung_CD4_TRM&quot;,&quot;Poon_2022_Skin_CD4_TRM&quot;,&quot;Poon_2022_jejunum_CD4_TRM&quot;, 
+                &quot;Zhang_2022_Liver_HBV_CXCL13_CD4&quot;, &quot;Zheng_2017_Liver_HCC_CXCL13_CD4&quot;, &quot;Argyriou_2022_Synovial_TPH&quot;, &quot;Law_2024_Synovial_TPH&quot;)){
+  
+#Genes module 
+my_data &lt;- read_excel(paste0(here::here(&quot;data/processed/amR053_List_features_genes_Update_11092024.xlsx&quot;)), sheet = sname, col_names = F)
+colnames(my_data) &lt;- sname
+amr.harmony &lt;- AddModuleScore(amr.harmony, features=list(my_data[[sname]]), name= sname, search=TRUE)
+
+# Feature plot highlight top 5%
+top95p &lt;- tail(quantile(t(amr.harmony[[paste(sname,&#39;1&#39;,sep=&#39;&#39;)]]),seq(0,1,0.05)),2)[1]
+top_cells &lt;- colnames(amr.harmony)[t(amr.harmony[[paste(sname,&#39;1&#39;,sep=&#39;&#39;)]]) &gt; top95p]
+pt_size_set &lt;- rep(0.01, dim(amr.harmony)[2])
+names(pt_size_set) &lt;- colnames(amr.harmony)
+pt_size_set[top_cells] &lt;- 1
+ft_modlist[[sname]] &lt;-FeaturePlot(amr.harmony, features=paste(sname,&#39;1&#39;,sep=&#39;&#39;), pt.size=pt_size_set) + scale_colour_gradientn(colours=rev(brewer.pal(n=11, name=&quot;RdBu&quot;))) + labs(title = &quot;&quot;, subtitle = paste0(&quot;Gene set score:\n&quot;,sname)) + theme(plot.subtitle = element_text(size = 12)) &amp; NoLegend() &amp; NoAxes()
+
+
+# List module score  violin Plot pairwise wilcoxon test
+liste_tempo &lt;- amr.harmony[[c(paste(sname,&#39;1&#39;,sep=&#39;&#39;),&#39;seurat_clusters&#39;)]]
+names(liste_tempo) &lt;- c(&#39;mod_score&#39;,&#39;clusters&#39;)
+pwWlcx_auto &lt;- pairwise_wilcox_test(liste_tempo,formula=mod_score ~ clusters,p.adjust.method = &quot;BH&quot;)
+pwWlcx_auto_f =  pwWlcx_auto[pwWlcx_auto$group1 %in% c(2,6)| pwWlcx_auto$group2 %in% c(2,6), ]
+
+mod_plot_list[[sname]] &lt;-  ggviolin(liste_tempo, x=&#39;clusters&#39;, y=&#39;mod_score&#39;,palette=hue_pal()(10), fill=&#39;clusters&#39;) + 
+stat_pvalue_manual(pwWlcx_auto_f, hide.ns = FALSE, y.position=0.5, step.increase=0.05) + ggtitle(sname)+ theme(legend.position = &#39;none&#39;) + xlab(&quot;scRNA-seq clusters&quot;) + ylab(&quot;Gene set score&quot;)
+
+}
+
+fig &lt;- plot_grid(mod_plot_list[[1]], ft_modlist[[1]],
+                 mod_plot_list[[2]], ft_modlist[[2]],
+                 mod_plot_list[[3]], ft_modlist[[3]],
+                 mod_plot_list[[4]], ft_modlist[[4]],
+                 mod_plot_list[[5]], ft_modlist[[5]],
+                 mod_plot_list[[6]], ft_modlist[[6]],
+                 mod_plot_list[[7]], ft_modlist[[7]],
+                 nrow = 3, labels = &quot;A&quot;)
+
+dir.create(here::here(&quot;output&quot;, DOCNAME), showWarnings = FALSE)
+
+ggsave(here::here(&quot;output&quot;, DOCNAME, &quot;suppfigure12.pdf&quot;), fig,
+        width = 18, height = 12, scale = 1)
+ggsave(here::here(&quot;output&quot;, DOCNAME, &quot;suppfigure12.png&quot;), fig,
+        width = 18, height = 12, scale = 1)
+
+fig</code></pre>
+<p><img src="figure/05-fig3.Rmd/suppfig12-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="output-files" class="section level1">
+<h1>Output files</h1>
+<p>This table describes the output files produced by this document. Right click and <em>Save Link As…</em> to download the results.</p>
+<pre class="r"><code>saveRDS(amr.harmony, here::here(&quot;data/processed/05-sc_seurat.rds&quot;))</code></pre>
+<pre class="r"><code>dir.create(here::here(&quot;output&quot;, DOCNAME), showWarnings = FALSE)
+
+knitr::kable(data.frame(
+     File = c(
+         getDownloadLink2(&quot;figure3-panelB.png&quot;, str_sub(here::here(&quot;output&quot;, DOCNAME),2,-1)),
+         getDownloadLink2(&quot;figure3-panelB.pdf&quot;, str_sub(here::here(&quot;output&quot;, DOCNAME),2,-1)),
+         getDownloadLink2(&quot;figure3-panelC.png&quot;, str_sub(here::here(&quot;output&quot;, DOCNAME),2,-1)),
+         getDownloadLink2(&quot;figure3-panelC.pdf&quot;, str_sub(here::here(&quot;output&quot;, DOCNAME),2,-1)),
+         getDownloadLink2(&quot;figure3-panelE.png&quot;, str_sub(here::here(&quot;output&quot;, DOCNAME),2,-1)),
+         getDownloadLink2(&quot;figure3-panelE.pdf&quot;, str_sub(here::here(&quot;output&quot;, DOCNAME),2,-1)),
+         getDownloadLink2(&quot;suppfigure10.png&quot;, str_sub(here::here(&quot;output&quot;, DOCNAME),2,-1)),
+         getDownloadLink2(&quot;suppfigure10.pdf&quot;, str_sub(here::here(&quot;output&quot;, DOCNAME),2,-1)),
+         getDownloadLink2(&quot;suppfigure11.png&quot;, str_sub(here::here(&quot;output&quot;, DOCNAME),2,-1)), 
+         getDownloadLink2(&quot;suppfigure11.pdf&quot;, str_sub(here::here(&quot;output&quot;, DOCNAME),2,-1)),
+         getDownloadLink2(&quot;suppfigure12.png&quot;, str_sub(here::here(&quot;output&quot;, DOCNAME),2,-1)), # bug one &quot;/&quot; plus
+         getDownloadLink2(&quot;suppfigure12.pdf&quot;, str_sub(here::here(&quot;output&quot;, DOCNAME),2,-1))
+     ),
+     Description = c(
+         &quot;Figure 3 panel B (PNG)&quot;,
+         &quot;Figure 3 panel B (PDF)&quot;,
+         &quot;Figure 3 panel C (PNG)&quot;,
+         &quot;Figure 3 panel C (PDF)&quot;,
+         &quot;Figure 3 panel E (PNG)&quot;,
+         &quot;Figure 3 panel E (PDF)&quot;,
+         &quot;Supplementary Figure 10 (PNG)&quot;,
+         &quot;Supplementary Figure 10 (PDF)&quot;,
+         &quot;Supplementary Figure 11 (PNG)&quot;,
+         &quot;Supplementary Figure 11 (PDF)&quot;,
+         &quot;Supplementary Figure 12 (PNG)&quot;,
+         &quot;Supplementary Figure 12 (PDF)&quot;
+     )
+ ))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="/mnt/DOSI/PMLAB/USERS/Active/Chuang_DONG/apprendre/GithubIOR/proj_distal/output/figure-3/figure3-panelB.png">figure3-panelB.png</a></td>
+<td align="left">Figure 3 panel B (PNG)</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="/mnt/DOSI/PMLAB/USERS/Active/Chuang_DONG/apprendre/GithubIOR/proj_distal/output/figure-3/figure3-panelB.pdf">figure3-panelB.pdf</a></td>
+<td align="left">Figure 3 panel B (PDF)</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="/mnt/DOSI/PMLAB/USERS/Active/Chuang_DONG/apprendre/GithubIOR/proj_distal/output/figure-3/figure3-panelC.png">figure3-panelC.png</a></td>
+<td align="left">Figure 3 panel C (PNG)</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="/mnt/DOSI/PMLAB/USERS/Active/Chuang_DONG/apprendre/GithubIOR/proj_distal/output/figure-3/figure3-panelC.pdf">figure3-panelC.pdf</a></td>
+<td align="left">Figure 3 panel C (PDF)</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="/mnt/DOSI/PMLAB/USERS/Active/Chuang_DONG/apprendre/GithubIOR/proj_distal/output/figure-3/figure3-panelE.png">figure3-panelE.png</a></td>
+<td align="left">Figure 3 panel E (PNG)</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="/mnt/DOSI/PMLAB/USERS/Active/Chuang_DONG/apprendre/GithubIOR/proj_distal/output/figure-3/figure3-panelE.pdf">figure3-panelE.pdf</a></td>
+<td align="left">Figure 3 panel E (PDF)</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="/mnt/DOSI/PMLAB/USERS/Active/Chuang_DONG/apprendre/GithubIOR/proj_distal/output/figure-3/suppfigure10.png">suppfigure10.png</a></td>
+<td align="left">Supplementary Figure 10 (PNG)</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="/mnt/DOSI/PMLAB/USERS/Active/Chuang_DONG/apprendre/GithubIOR/proj_distal/output/figure-3/suppfigure10.pdf">suppfigure10.pdf</a></td>
+<td align="left">Supplementary Figure 10 (PDF)</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="/mnt/DOSI/PMLAB/USERS/Active/Chuang_DONG/apprendre/GithubIOR/proj_distal/output/figure-3/suppfigure11.png">suppfigure11.png</a></td>
+<td align="left">Supplementary Figure 11 (PNG)</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="/mnt/DOSI/PMLAB/USERS/Active/Chuang_DONG/apprendre/GithubIOR/proj_distal/output/figure-3/suppfigure11.pdf">suppfigure11.pdf</a></td>
+<td align="left">Supplementary Figure 11 (PDF)</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="/mnt/DOSI/PMLAB/USERS/Active/Chuang_DONG/apprendre/GithubIOR/proj_distal/output/figure-3/suppfigure12.png">suppfigure12.png</a></td>
+<td align="left">Supplementary Figure 12 (PNG)</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="/mnt/DOSI/PMLAB/USERS/Active/Chuang_DONG/apprendre/GithubIOR/proj_distal/output/figure-3/suppfigure12.pdf">suppfigure12.pdf</a></td>
+<td align="left">Supplementary Figure 12 (PDF)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="session-information" class="section level1">
+<h1>Session information</h1>
+<pre class="r"><code>devtools::session_info()</code></pre>
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.1.2 (2021-11-01)
+ os       Ubuntu 20.04.3 LTS
+ system   x86_64, linux-gnu
+ ui       X11
+ language (EN)
+ collate  en_US.UTF-8
+ ctype    en_US.UTF-8
+ tz       Etc/UTC
+ date     2024-12-18
+ pandoc   2.14.0.3 @ /usr/lib/rstudio-server/bin/pandoc/ (via rmarkdown)
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ package         * version date (UTC) lib source
+ abind             1.4-5   2016-07-21 [1] RSPM (R 4.1.0)
+ assertthat        0.2.1   2019-03-21 [1] RSPM (R 4.1.0)
+ backports         1.4.1   2021-12-13 [1] RSPM (R 4.1.0)
+ brio              1.1.3   2021-11-30 [1] RSPM (R 4.1.0)
+ broom             0.7.12  2022-01-28 [1] RSPM (R 4.1.0)
+ bslib             0.3.1   2021-10-06 [1] RSPM (R 4.1.0)
+ cachem            1.0.6   2021-08-19 [1] RSPM (R 4.1.0)
+ callr             3.7.0   2021-04-20 [1] RSPM (R 4.1.0)
+ car               3.0-12  2021-11-06 [1] RSPM (R 4.1.0)
+ carData           3.0-5   2022-01-06 [1] RSPM (R 4.1.0)
+ cellranger        1.1.0   2016-07-27 [1] RSPM (R 4.1.0)
+ cli               3.6.1   2023-03-23 [1] RSPM (R 4.1.0)
+ cluster           2.1.2   2021-04-17 [2] CRAN (R 4.1.2)
+ codetools         0.2-18  2020-11-04 [2] CRAN (R 4.1.2)
+ colorspace        2.0-3   2022-02-21 [1] RSPM (R 4.1.0)
+ cowplot           1.1.1   2020-12-30 [1] RSPM (R 4.1.0)
+ crayon            1.5.0   2022-02-14 [1] RSPM (R 4.1.0)
+ data.table        1.14.2  2021-09-27 [1] RSPM (R 4.1.0)
+ DBI               1.1.2   2021-12-20 [1] RSPM (R 4.1.0)
+ deldir            1.0-6   2021-10-23 [1] RSPM (R 4.1.0)
+ desc              1.4.1   2022-03-06 [1] RSPM (R 4.1.0)
+ devtools          2.4.3   2021-11-30 [1] RSPM (R 4.1.0)
+ digest            0.6.29  2021-12-01 [1] RSPM (R 4.1.0)
+ dplyr             1.0.8   2022-02-08 [1] RSPM (R 4.1.0)
+ ellipsis          0.3.2   2021-04-29 [1] RSPM (R 4.1.0)
+ evaluate          0.15    2022-02-18 [1] RSPM (R 4.1.0)
+ fansi             1.0.2   2022-01-14 [1] RSPM (R 4.1.0)
+ fastmap           1.1.0   2021-01-25 [1] RSPM (R 4.1.0)
+ fitdistrplus      1.1-6   2021-09-28 [1] RSPM (R 4.1.0)
+ fs                1.5.2   2021-12-08 [1] RSPM (R 4.1.0)
+ future            1.23.0  2021-10-31 [1] RSPM (R 4.1.0)
+ future.apply      1.8.1   2021-08-10 [1] RSPM (R 4.1.0)
+ generics          0.1.2   2022-01-31 [1] RSPM (R 4.1.0)
+ ggplot2         * 3.4.4   2023-10-12 [1] RSPM (R 4.1.0)
+ ggpubr            0.4.0   2020-06-27 [1] RSPM (R 4.1.0)
+ ggrepel           0.9.1   2021-01-15 [1] RSPM (R 4.1.0)
+ ggridges          0.5.3   2021-01-08 [1] RSPM (R 4.1.0)
+ ggsignif          0.6.3   2021-09-09 [1] RSPM (R 4.1.0)
+ git2r             0.33.0  2023-11-26 [1] RSPM (R 4.1.0)
+ globals           0.14.0  2020-11-22 [1] RSPM (R 4.1.0)
+ glue              1.6.2   2022-02-24 [1] RSPM (R 4.1.0)
+ goftest           1.2-3   2021-10-07 [1] RSPM (R 4.1.0)
+ gridExtra         2.3     2017-09-09 [1] RSPM (R 4.1.0)
+ gtable            0.3.0   2019-03-25 [1] RSPM (R 4.1.0)
+ here              1.0.1   2020-12-13 [1] RSPM (R 4.1.0)
+ htmltools         0.5.2   2021-08-25 [1] RSPM (R 4.1.0)
+ htmlwidgets       1.5.4   2021-09-08 [1] RSPM (R 4.1.0)
+ httpuv            1.6.5   2022-01-05 [1] RSPM (R 4.1.0)
+ httr              1.4.2   2020-07-20 [1] RSPM (R 4.1.0)
+ ica               1.0-2   2018-05-24 [1] RSPM (R 4.1.0)
+ igraph            1.5.1   2023-08-10 [1] RSPM (R 4.1.0)
+ irlba             2.3.5   2021-12-06 [1] RSPM (R 4.1.0)
+ jquerylib         0.1.4   2021-04-26 [1] RSPM (R 4.1.0)
+ jsonlite          1.8.0   2022-02-22 [1] RSPM (R 4.1.0)
+ KernSmooth        2.23-20 2021-05-03 [2] CRAN (R 4.1.2)
+ knitr           * 1.37    2021-12-16 [1] RSPM (R 4.1.0)
+ later             1.3.0   2021-08-18 [1] RSPM (R 4.1.0)
+ lattice           0.20-45 2021-09-22 [2] CRAN (R 4.1.2)
+ lazyeval          0.2.2   2019-03-15 [1] RSPM (R 4.1.0)
+ leiden            0.3.9   2021-07-27 [1] RSPM (R 4.1.0)
+ lifecycle         1.0.3   2022-10-07 [1] RSPM (R 4.1.0)
+ listenv           0.8.0   2019-12-05 [1] RSPM (R 4.1.0)
+ lmtest            0.9-39  2021-11-07 [1] RSPM (R 4.1.0)
+ magrittr          2.0.2   2022-01-26 [1] RSPM (R 4.1.0)
+ MASS              7.3-54  2021-05-03 [2] CRAN (R 4.1.2)
+ Matrix            1.3-4   2021-06-01 [2] CRAN (R 4.1.2)
+ matrixStats       0.61.0  2021-09-17 [1] RSPM (R 4.1.0)
+ memoise           2.0.1   2021-11-26 [1] RSPM (R 4.1.0)
+ mgcv              1.8-38  2021-10-06 [2] CRAN (R 4.1.2)
+ mime              0.12    2021-09-28 [1] RSPM (R 4.1.0)
+ miniUI            0.1.1.1 2018-05-18 [1] RSPM (R 4.1.0)
+ munsell           0.5.0   2018-06-12 [1] RSPM (R 4.1.0)
+ nlme              3.1-153 2021-09-07 [2] CRAN (R 4.1.2)
+ parallelly        1.30.0  2021-12-17 [1] RSPM (R 4.1.0)
+ patchwork         1.1.1   2020-12-17 [1] RSPM (R 4.1.0)
+ pbapply           1.5-0   2021-09-16 [1] RSPM (R 4.1.0)
+ pillar            1.7.0   2022-02-01 [1] RSPM (R 4.1.0)
+ pkgbuild          1.3.1   2021-12-20 [1] RSPM (R 4.1.0)
+ pkgconfig         2.0.3   2019-09-22 [1] RSPM (R 4.1.0)
+ pkgload           1.2.4   2021-11-30 [1] RSPM (R 4.1.0)
+ plotly            4.10.0  2021-10-09 [1] RSPM (R 4.1.0)
+ plyr              1.8.6   2020-03-03 [1] RSPM (R 4.1.0)
+ png               0.1-7   2013-12-03 [1] RSPM (R 4.1.0)
+ polyclip          1.10-0  2019-03-14 [1] RSPM (R 4.1.0)
+ prettyunits       1.1.1   2020-01-24 [1] RSPM (R 4.1.0)
+ processx          3.5.2   2021-04-30 [1] RSPM (R 4.1.0)
+ promises          1.2.0.1 2021-02-11 [1] RSPM (R 4.1.0)
+ ps                1.6.0   2021-02-28 [1] RSPM (R 4.1.0)
+ purrr             0.3.4   2020-04-17 [1] RSPM (R 4.1.0)
+ R6                2.5.1   2021-08-19 [1] RSPM (R 4.1.0)
+ RANN              2.6.1   2019-01-08 [1] RSPM (R 4.1.0)
+ RColorBrewer      1.1-2   2014-12-07 [1] RSPM (R 4.1.0)
+ Rcpp              1.0.8   2022-01-13 [1] RSPM (R 4.1.0)
+ RcppAnnoy         0.0.19  2021-07-30 [1] RSPM (R 4.1.0)
+ readxl          * 1.3.1   2019-03-13 [1] RSPM (R 4.1.0)
+ remotes           2.4.2   2021-11-30 [1] RSPM (R 4.1.0)
+ reshape2          1.4.4   2020-04-09 [1] RSPM (R 4.1.0)
+ reticulate        1.23    2022-01-14 [1] RSPM (R 4.1.0)
+ rlang             1.1.1   2023-04-28 [1] RSPM (R 4.1.0)
+ rmarkdown         2.11    2021-09-14 [1] RSPM (R 4.1.0)
+ ROCR              1.0-11  2020-05-02 [1] RSPM (R 4.1.0)
+ rpart             4.1-15  2019-04-12 [2] CRAN (R 4.1.2)
+ rprojroot         2.0.2   2020-11-15 [1] RSPM (R 4.1.0)
+ rstatix         * 0.7.0   2021-02-13 [1] RSPM (R 4.1.0)
+ rstudioapi        0.13    2020-11-12 [1] RSPM (R 4.1.0)
+ Rtsne             0.15    2018-11-10 [1] RSPM (R 4.1.0)
+ sass              0.4.0   2021-05-12 [1] RSPM (R 4.1.0)
+ scales          * 1.2.1   2022-08-20 [1] RSPM (R 4.1.0)
+ scattermore       0.7     2020-11-24 [1] RSPM (R 4.1.0)
+ sctransform       0.3.3   2022-01-13 [1] RSPM (R 4.1.0)
+ sessioninfo       1.2.2   2021-12-06 [1] RSPM (R 4.1.0)
+ Seurat          * 4.1.0   2022-01-14 [1] RSPM (R 4.1.0)
+ SeuratObject    * 4.0.4   2021-11-23 [1] RSPM (R 4.1.0)
+ shiny             1.7.1   2021-10-02 [1] RSPM (R 4.1.0)
+ spatstat.core     2.3-2   2021-11-26 [1] RSPM (R 4.1.0)
+ spatstat.data     2.1-2   2021-12-17 [1] RSPM (R 4.1.0)
+ spatstat.geom     2.4-0   2022-03-29 [1] RSPM (R 4.1.0)
+ spatstat.sparse   2.1-0   2021-12-17 [1] RSPM (R 4.1.0)
+ spatstat.utils    2.3-0   2021-12-12 [1] RSPM (R 4.1.0)
+ stringi           1.7.6   2021-11-29 [1] RSPM (R 4.1.0)
+ stringr           1.4.0   2019-02-10 [1] RSPM (R 4.1.0)
+ survival          3.2-13  2021-08-24 [2] CRAN (R 4.1.2)
+ tensor            1.5     2012-05-05 [1] RSPM (R 4.1.0)
+ testthat          3.1.2   2022-01-20 [1] RSPM (R 4.1.0)
+ tibble            3.1.8   2022-07-22 [1] RSPM (R 4.1.0)
+ tidyr             1.2.0   2022-02-01 [1] RSPM (R 4.1.0)
+ tidyselect        1.1.2   2022-02-21 [1] RSPM (R 4.1.0)
+ usethis           2.1.5   2021-12-09 [1] RSPM (R 4.1.0)
+ utf8              1.2.2   2021-07-24 [1] RSPM (R 4.1.0)
+ uwot              0.1.11  2021-12-02 [1] RSPM (R 4.1.0)
+ vctrs             0.6.4   2023-10-12 [1] RSPM (R 4.1.0)
+ viridisLite       0.4.0   2021-04-13 [1] RSPM (R 4.1.0)
+ withr             2.5.0   2022-03-03 [1] RSPM (R 4.1.0)
+ workflowr         1.7.1   2023-08-23 [1] RSPM (R 4.1.0)
+ xfun              0.30    2022-03-02 [1] RSPM (R 4.1.0)
+ xtable            1.8-4   2019-04-21 [1] RSPM (R 4.1.0)
+ yaml              2.3.5   2022-02-21 [1] RSPM (R 4.1.0)
+ zoo               1.8-9   2021-03-09 [1] RSPM (R 4.1.0)
+
+ [1] /usr/local/lib/R/site-library
+ [2] /usr/local/lib/R/library
+
+──────────────────────────────────────────────────────────────────────────────</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.1.2 (2021-11-01)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 20.04.3 LTS
+
+Matrix products: default
+BLAS/LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.8.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8    LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats4    stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] scales_1.2.1                rstatix_0.7.0               EnhancedVolcano_1.12.0      ggrepel_0.9.1               RColorBrewer_1.1-2          muscat_1.9.2                scater_1.22.0               scuttle_1.4.0              
+ [9] SingleCellExperiment_1.16.0 DESeq2_1.34.0               SummarizedExperiment_1.24.0 Biobase_2.54.0              MatrixGenerics_1.6.0        matrixStats_0.61.0          GenomicRanges_1.46.1        GenomeInfoDb_1.30.1        
+[17] IRanges_2.28.0              S4Vectors_0.32.3            BiocGenerics_0.40.0         pheatmap_1.0.12             forcats_0.5.1               stringr_1.4.0               purrr_0.3.4                 readr_2.1.1                
+[25] tidyr_1.2.0                 tibble_3.1.8                tidyverse_1.3.1             jsonlite_1.8.0              glue_1.6.2                  dplyr_1.0.8                 DT_0.22                     readxl_1.3.1               
+[33] knitr_1.37                  cowplot_1.1.1               ggpubr_0.4.0                ggplot2_3.4.4               SeuratObject_4.0.4          Seurat_4.1.0               
+
+loaded via a namespace (and not attached):
+  [1] scattermore_0.7           ragg_1.2.2                bit64_4.0.5               irlba_2.3.5               DelayedArray_0.20.0       data.table_1.14.2         rpart_4.1-15              KEGGREST_1.34.0           RCurl_1.98-1.6           
+ [10] doParallel_1.0.16         generics_0.1.2            ScaledMatrix_1.2.0        callr_3.7.0               usethis_2.1.5             RSQLite_2.2.9             RANN_2.6.1                future_1.23.0             bit_4.0.4                
+ [19] tzdb_0.2.0                spatstat.data_2.1-2       xml2_1.3.3                lubridate_1.8.0           httpuv_1.6.5              assertthat_0.2.1          viridis_0.6.2             xfun_0.30                 jquerylib_0.1.4          
+ [28] hms_1.1.1                 evaluate_0.15             promises_1.2.0.1          fansi_1.0.2               progress_1.2.2            caTools_1.18.2            dbplyr_2.1.1              igraph_1.5.1              DBI_1.1.2                
+ [37] geneplotter_1.72.0        htmlwidgets_1.5.4         spatstat.geom_2.4-0       ellipsis_0.3.2            backports_1.4.1           annotate_1.72.0           deldir_1.0-6              sparseMatrixStats_1.6.0   vctrs_0.6.4              
+ [46] remotes_2.4.2             here_1.0.1                ROCR_1.0-11               abind_1.4-5               cachem_1.0.6              withr_2.5.0               sctransform_0.3.3         prettyunits_1.1.1         goftest_1.2-3            
+ [55] cluster_2.1.2             lazyeval_0.2.2            crayon_1.5.0              genefilter_1.76.0         labeling_0.4.2            edgeR_3.36.0              pkgconfig_2.0.3           pkgload_1.2.4             nlme_3.1-153             
+ [64] vipor_0.4.5               devtools_2.4.3            blme_1.0-5                rlang_1.1.1               globals_0.14.0            lifecycle_1.0.3           miniUI_0.1.1.1            extrafontdb_1.0           modelr_0.1.8             
+ [73] rsvd_1.0.5                rprojroot_2.0.2           ggrastr_1.0.1             cellranger_1.1.0          polyclip_1.10-0           lmtest_0.9-39             Matrix_1.3-4              carData_3.0-5             boot_1.3-28              
+ [82] zoo_1.8-9                 reprex_2.0.1              beeswarm_0.4.0            processx_3.5.2            ggridges_0.5.3            GlobalOptions_0.1.2       png_0.1-7                 viridisLite_0.4.0         rjson_0.2.21             
+ [91] bitops_1.0-7              KernSmooth_2.23-20        Biostrings_2.62.0         workflowr_1.7.1           blob_1.2.2                DelayedMatrixStats_1.16.0 shape_1.4.6               parallelly_1.30.0         ggsignif_0.6.3           
+[100] beachmat_2.10.0           memoise_2.0.1             magrittr_2.0.2            plyr_1.8.6                ica_1.0-2                 gplots_3.1.1              zlibbioc_1.40.0           compiler_4.1.2            ash_1.0-15               
+[109] clue_0.3-60               lme4_1.1-28               fitdistrplus_1.1-6        cli_3.6.1                 XVector_0.34.0            lmerTest_3.1-3            listenv_0.8.0             ps_1.6.0                  patchwork_1.1.1          
+[118] pbapply_1.5-0             TMB_1.7.22                MASS_7.3-54               mgcv_1.8-38               tidyselect_1.1.2          stringi_1.7.6             textshaping_0.3.6         highr_0.9                 proj4_1.0-11             
+[127] yaml_2.3.5                BiocSingular_1.10.0       locfit_1.5-9.4            grid_4.1.2                sass_0.4.0                tools_4.1.2               future.apply_1.8.1        parallel_4.1.2            circlize_0.4.13          
+[136] rstudioapi_0.13           git2r_0.33.0              foreach_1.5.1             gridExtra_2.3             farver_2.1.0              Rtsne_0.15                digest_0.6.29             shiny_1.7.1               Rcpp_1.0.8               
+[145] car_3.0-12                broom_0.7.12              ggalt_0.4.0               later_1.3.0               RcppAnnoy_0.0.19          httr_1.4.2                AnnotationDbi_1.56.2      ComplexHeatmap_2.10.0     colorspace_2.0-3         
+[154] brio_1.1.3                rvest_1.0.2               XML_3.99-0.8              fs_1.5.2                  tensor_1.5                reticulate_1.23           splines_4.1.2             uwot_0.1.11               spatstat.utils_2.3-0     
+[163] systemfonts_1.0.4         sessioninfo_1.2.2         plotly_4.10.0             xtable_1.8-4              nloptr_2.0.0              testthat_3.1.2            R6_2.5.1                  pillar_1.7.0              htmltools_0.5.2          
+[172] mime_0.12                 fastmap_1.1.0             minqa_1.2.4               BiocParallel_1.28.3       BiocNeighbors_1.12.0      codetools_0.2-18          maps_3.4.0                pkgbuild_1.3.1            utf8_1.2.2               
+[181] bslib_0.3.1               lattice_0.20-45           spatstat.sparse_2.1-0     pbkrtest_0.5.1            numDeriv_2016.8-1.1       curl_4.3.2                ggbeeswarm_0.6.0          leiden_0.3.9              gtools_3.9.2             
+[190] Rttf2pt1_1.3.10           survival_3.2-13           limma_3.50.1              glmmTMB_1.1.2.3           rmarkdown_2.11            desc_1.4.1                munsell_0.5.0             GetoptLong_1.0.5          GenomeInfoDbData_1.2.7   
+[199] iterators_1.0.13          variancePartition_1.24.0  haven_2.4.3               reshape2_1.4.4            gtable_0.3.0              extrafont_0.17            spatstat.core_2.3-2      </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

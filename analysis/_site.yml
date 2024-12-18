@@ -1,0 +1,48 @@
+name: "DISTAL Analysis"
+output_dir: "../docs"
+navbar:
+  title: "DISTAL Analysis"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Getting started"
+      href: getting-started.html
+    - text: "Analysis"
+      menu:
+        - text: "Figure 2"
+          href: 02-fig2.html
+        - text: "Figure 3"
+          href: 05-fig3.html
+        - text: "Figure 4"
+          href: 03-fig4.html
+        - text: "Supplementary figure 2"
+          href: 04-suppfig2.html
+        - text: "Supplementary figure 4"
+          href: 06-suppfig4.html  
+        - text: "Supplementary figure 10"
+          href: 05-fig3.html#Supplementary_figure_10 
+        - text: "Supplementary figure 11"
+          href: 05-fig3.html#Supplementary_figure_11 
+        - text: "Supplementary figure 12"
+          href: 05-fig3.html#Supplementary_figure_12
+        - text: "Supplementary figure 14"
+          href: 07-suppfig14.html  
+    - text: "Reports"
+      menu:
+        - text: "Cell Ranger"
+          href: cellranger_web_summary.html
+    - text: "Methods"
+      href: 90-methods.html
+  right:
+    - text: "License"
+      href: license.html
+    - icon: fa-github
+      href: https://github.com/Chuang1118/FB5P-seq
+output:
+  workflowr::wflow_html:
+    toc: true
+    toc_float: true
+    theme: cosmo
+    highlight: textmate
+    code_folding: hide
+    df_print: paged

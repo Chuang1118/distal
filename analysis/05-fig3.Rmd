@@ -1,0 +1,616 @@
+---
+title: "Figure 3"
+---
+
+```{r knitr, include = FALSE}
+DOCNAME = "figure-3"
+NOW <- Sys.time()
+
+# Time chunks during knitting
+knitr::knit_hooks$set(timeit = function(before) {
+    if (before) {
+        print(paste("Start:", Sys.time()))
+        NOW <<- Sys.time()
+    } else {
+        print(paste("Stop:", Sys.time()))
+        print(Sys.time() - NOW)
+    }
+})
+
+knitr::opts_chunk$set(
+    autodep        = TRUE,
+    cache          = TRUE,
+    cache.lazy     = FALSE,
+    cache.path     = paste0("cache/", DOCNAME, "/"),
+    cache.comments = FALSE,
+    echo           = TRUE,
+    error          = FALSE,
+    fig.align      = "center",
+    fig.width      = 10,
+    fig.height     = 8,
+    message        = FALSE,
+    warning        = FALSE,
+    timeit         = TRUE
+)
+```
+
+```{r libaries, cache = FALSE}
+# scRNA-seq
+library(Seurat)
+#packageVersion("Seurat")
+
+# Plotting
+library("ggplot2")
+
+# Presentation
+library("knitr")
+
+# Others
+library("rstatix")
+library('scales')
+library("readxl")
+```
+
+```{r source, cache = FALSE}
+source(here::here("R/00_generalDeps.R"))
+source(here::here("R/output.R"))
+```
+
+<!-- # ```{r depends-paths} -->
+<!-- # filt_path <- here::here("data/processed/AmR053_harmony_azimuth_V4regRB.rds") -->
+<!-- # ``` -->
+
+Introduction
+============
+
+In this document we are going to perform clustering and plotting figure 3 panel B C & E,  Supplementary figure 5 and Supplementary figure 6
+using `Seurat`.
+
+
+Seurat -Integration by harmony
+==============
+
+Parse TCR
+------
+
+```{r parse_TCR}
+# 	# Function parser TCR cellRanger output
+#   # Add Clonotypes functions
+#    add_clonotype <- function(tcr_prefix, seurat_obj, type,num){
+#     vdj_file=file.path(tcr_prefix,"filtered_contig_annotations.csv")
+#     if(file.exists(vdj_file)){ 
+#       res <- tryCatch({
+#         tcr <- read.csv(vdj_file)
+#         
+#         # Extract all informations of V(d)J and c genes per barcode
+#         if(type =='b'){
+#           tcr <- as.data.frame(format_b_line(tcr))
+#         } else if (type == 't'){
+#           tcr <- as.data.frame(format_t_line(tcr))
+#         }
+#         
+#         # Clonotype-centric info.
+#         clono <- read.csv(paste(tcr_prefix,"clonotypes.csv", sep="/"))
+#         clono <- clono[, c("clonotype_id", "cdr3s_aa", "proportion")]
+#         colnames(clono) <- paste(type, colnames(clono), sep="_")
+#         # Slap the AA sequences onto our original table by clonotype_id.
+#         tcr <- merge(tcr, clono,by.x='clonotype_ID', by.y=paste(type,'clonotype_id',sep='_'))
+#         row.names(tcr) <- paste(tcr$barcode,'_',num,sep='')
+#         tcr$barcode <- NULL
+#         # Add to the Seurat object's metadata.
+#         clono_seurat <- AddMetaData(object=seurat_obj, metadata=tcr)
+#         return(clono_seurat)
+#       }, error =  function(e) {
+#         print(e)
+#         return(seurat_obj)
+#       })
+#     } else {
+#       print(paste('Cannot find file : ',vdj_file))
+#     }
+#     return(seurat_obj)
+#   }
+#   
+#   #Function format TCR output
+#   format_t_line <- function(tcr){
+#     list_barcode <- unique(tcr$barcode)
+#     vdj_list <- c()
+#     for(barcode in unique(tcr$barcode)){
+#       list_bc <- tcr[tcr$barcode==barcode,]
+#       clonoID <- unique(list_bc$raw_clonotype_id)
+#       TCRID <- paste(paste(list_bc$chain,paste(list_bc$v_gene,list_bc$d_gene,list_bc$j_gene,list_bc$c_gene,sep=';'),sep=':'),collapse=' ')
+#       TR_list <- list()
+#       TR_list[['TRA']] <- list_bc$chain[list_bc$chain=='TRA']
+#       TR_list[['TRAV']] <- list_bc$v_gene[list_bc$chain=='TRA'  & list_bc$v_gene!='' ]
+#       TR_list[['TRAD']] <- list_bc$d_gene[list_bc$chain=='TRA' & list_bc$d_gene!='' ]
+#       TR_list[['TRAJ']] <- list_bc$j_gene[list_bc$chain=='TRA' & list_bc$j_gene!='' ]
+#       TR_list[['TRAC']]<- list_bc$c_gene[list_bc$chain=='TRA' & list_bc$c_gene!='' ]
+#       
+#       TR_list[['TRB']] <- list_bc$chain[list_bc$chain=='TRB']
+#       TR_list[['TRBV']] <- list_bc$v_gene[list_bc$chain=='TRB'  & list_bc$v_gene!='' ]
+#       TR_list[['TRBD']] <- list_bc$d_gene[list_bc$chain=='TRB' & list_bc$d_gene!='' ]
+#       TR_list[['TRBJ']] <- list_bc$j_gene[list_bc$chain=='TRB' & list_bc$j_gene!='' ]
+#       TR_list[['TRBC']]<- list_bc$c_gene[list_bc$chain=='TRB' & list_bc$c_gene!='' ]
+#       
+#       TR_list_out <- c()
+#       names_out <- c()
+#       for(tr in names(TR_list)){
+#         if(length(TR_list[[tr]])==1){
+#           TR_list_out <- c(TR_list_out,TR_list[[tr]][1],NA)
+#         } else if (length(TR_list[[tr]])==0){
+#           TR_list_out <- c(TR_list_out,NA,NA)
+#         } else {
+#           TR_list_out <- c(TR_list_out,TR_list[[tr]])
+#         }
+#         names_out <- c(names_out,paste(tr,c('1','2'),sep='_'))
+#         names(TR_list_out) <- names_out
+#       }
+#       
+#       vdj_list <- rbind(vdj_list,c('barcode'=barcode,'TCR_ID'=TCRID,TR_list_out,'clonotype_ID'=clonoID))
+#       
+#     }
+#     return(vdj_list)
+#   }
+```
+
+Load matrices
+------
+
+```{r load_matrices}
+# # Load Matrices and remove TCR genes from it
+# mat_v1<-Read10X(data.dir="CellRanger/AmR053_V1_Multi/sample_filtered_feature_bc_matrix",gene.column=2,unique.features=TRUE)
+# colnames(mat_v1)<-paste(colnames(mat_v1),'1',sep='_')
+# mat_v1 <- mat_v1[grep("^TRA[JV]|^TRB[JV]|^TRG[JV]|^TRD[JV]",row.names(mat_v1),invert=TRUE),]
+# mat_v2<-Read10X(data.dir='CellRanger/AmR053_V2_Multi/sample_filtered_feature_bc_matrix',gene.column=2,unique.features=TRUE)
+# colnames(mat_v2)<-paste(colnames(mat_v2),'2',sep='_')
+# mat_v2 <- mat_v2[grep("^TRA[JV]|^TRB[JV]|^TRG[JV]|^TRD[JV]",row.names(mat_v2),invert=TRUE),]
+# mat_v3<-Read10X(data.dir='CellRanger/AmR053_V3_Multi/sample_filtered_feature_bc_matrix',gene.column=2,unique.features=TRUE)
+# colnames(mat_v3)<-paste(colnames(mat_v3),'3',sep='_')
+# mat_v3 <- mat_v3[grep("^TRA[JV]|^TRB[JV]|^TRG[JV]|^TRD[JV]",row.names(mat_v3),invert=TRUE),]
+# mat_v4<-Read10X(data.dir='CellRanger/AmR053_V4_Multi/sample_filtered_feature_bc_matrix',gene.column=2,unique.features=TRUE)
+# colnames(mat_v4)<-paste(colnames(mat_v4),'4',sep='_')
+# mat_v4 <- mat_v4[grep("^TRA[JV]|^TRB[JV]|^TRG[JV]|^TRD[JV]",row.names(mat_v4),invert=TRUE),]
+```
+
+
+Setup the Seurat Object
+------
+
+```{r Seurat_obj}
+# # Create Seurat objects from matrices and add TCR metadata
+# amr_v1 <- CreateSeuratObject(counts = mat_v1, project = "AmR053_V1", min.cell=3,min.features=200)
+# amr_v1$samples <- 'V1'
+# amr_v1 <- add_clonotype('CellRanger/AmR053_V1_Multi/vdj_t', amr_v1, "t",'1')
+# amr_v2 <- CreateSeuratObject(counts = mat_v2, project = "AmR053_V2", min.cell=3,min.features=200)
+# amr_v2$samples <- 'V2'
+# amr_v2 <- add_clonotype('CellRanger/AmR053_V2_Multi/vdj_t', amr_v2, "t",'2')
+# amr_v3 <- CreateSeuratObject(counts = mat_v3, project = "AmR053_V3", min.cell=3,min.features=200)
+# amr_v3$samples <- 'V3'
+# amr_v3 <- add_clonotype('CellRanger/AmR053_V3_Multi/vdj_t', amr_v3, "t",'3')
+# amr_v4 <- CreateSeuratObject(counts = mat_v4, project = "AmR053_V4", min.cell=3,min.features=200)
+# amr_v4$samples <- 'V4'
+# amr_v4<- add_clonotype('CellRanger/AmR053_V4_Multi/vdj_t', amr_v4, "t",'4')
+# amr_list <- list('v1'=amr_v1, 'v2'=amr_v2,'v3'=amr_v3,'v4'=amr_v4)
+```
+
+Integration
+------
+
+```{r integration}
+# for(v in names(amr_list)){
+#         # Remove doublet based on TCR annotation
+#         #amr_list[[v]][['doubletTCR']] <- !(is.na(amr_list[[v]][['TRA_2']]) & is.na(amr_list[[v]][['TRB_2']]))
+#         # Add mitochondrial genes percentage
+#         amr_list[[v]][['percent.mt']] <- PercentageFeatureSet(amr_list[[v]],pattern="^[MTmt]{2}-")
+#         # Add rebosomal genes percentage
+#         amr_list[[v]][['percent.rb']] <- PercentageFeatureSet(amr_list[[v]],pattern="^RP[SL][[:digit:]]|^RPLP[[:digit:]]|^RPSA")
+#         # Subset object on number of genes per cells and TCR doublet
+#         amr_list[[v]] <-subset(amr_list[[v]],subset=nFeature_RNA > 500 & nFeature_RNA < 4000 & percent.mt < 5)# & doubletTCR==FALSE)
+#         # Normalise counts and regress on precentage of ribosomal genes
+#         amr_list[[v]] <- SCTransform(amr_list[[v]], vars.to.regress = "percent.rb", verbose = FALSE)
+# }
+# # Calculate integration features
+# integ_feat <- SelectIntegrationFeatures(amr_list, nfeatures=3000)
+# # Merge the four matrices
+# amr_all <- merge(amr_list[['v1']], y=c(amr_list[['v2']],amr_list[['v3']],amr_list[['v4']]), project ='AMR053')
+# # Integrate all data set with harmony
+# VariableFeatures(amr_all) <- integ_feat
+# amr_all <- RunPCA(amr_all, assay = "SCT", npcs = 50)
+# amr.harmony <- RunHarmony(amr_all,"samples", assay.use='SCT',plot_convergence = FALSE)
+```
+
+Clustering
+------
+
+```{r UMAP}
+# # Calculate clusters with resolution of 0.3
+# reso=0.3
+# amr.harmony <- FindNeighbors(amr.harmony, reduction = "harmony", dims = 1:13)
+# amr.harmony <- FindClusters(amr.harmony, resolution = reso,graph.name='SCT_snn')
+# amr.harmony <- RunUMAP(amr.harmony, reduction = "harmony", assay = 'SCT',dims = 1:13,seed.use=42)
+# amr.harmony.umap <- DimPlot(amr.harmony, reduction = "umap", group.by = "seurat_clusters", pt.size = .1,ncol=2, label=TRUE, seed=42)
+# umaps <- amr.harmony.umap
+```
+
+Markers HM
+------
+
+```{r markers_HM}
+# #Indentify marker genes for each cluster
+# DefaultAssay(amr.harmony) <- 'SCT'
+# amr.harmony<-ScaleData(amr.harmony, features = row.names(amr.harmony))
+# amr.harmony <- PrepSCTFindMarkers(amr.harmony, assay = "SCT", verbose = TRUE)
+# amr.harmony.mkrs <-  FindAllMarkers(amr.harmony, only.pos = TRUE, min.pct = 0.25, logfc.threshold = 0.25)
+# amr.harmony.mkrs_padj <- amr.harmony.mkrs[amr.harmony.mkrs$p_val_adj <0.01 ,]
+# amr.harmony.mkrs_padj %>% group_by(cluster) %>% top_n(n = 5, wt = avg_log2FC) -> top5
+# heatmap.mkrs <- DoHeatmap(amr.harmony, features=top5$gene, group.by='seurat_clusters')
+```
+
+Markers DP
+------
+
+```{r markers_DP}
+# list_feat=c('MAL','AQP3','TCF7','CCL5','GZMK','GZMA','HLA-DRA','LGALS1','CXCR3','NKG7','GZMH','PLEK','HIST1H1E','HIST1H1D','COTL1','GNLY','GZMB','PRF1','FOXP3','IKZF2','RTKN2','XIST','NEAT1','MACF1','AL627171.2','PLCG2','MT-ND6')
+# dot.mkrs <- DotPlot(amr.harmony,features=list_feat, cols='RdBu', dot.scale=12) + RotatedAxis() + ggtitle("Marker genes") + ylab('Clusters')
+```
+
+
+Module score
+------
+
+```{r module_score, echo=FALSE, message=FALSE, warning=FALSE}
+# #Genes module autoreactivity
+# autoreact <- str_split("MAGEH1,NMB,TIGIT,SPOCK2,GK,CTLA4,ITGA4,NR3C1,SYNE2,CD109,ICA1,ITM2A,TOX,HNRNPLL,DYNLL1,NDUFC1,IGFL2,LAPTM5,TSHZ2,LINC01480,TBC1D4,NIN,ARHGAP26,IFNAR2,CRYBG1,DCXR,CXCL13,RSRP1,TRAT1,TMEM59,TMSB4XP8,HLA-DRB1,AKAP13,NDUFV2P1,HLA-DPB1,STAT3,HIST1H4C,SGK1,MAPRE2,WBP2,RHBDD2,HMGN2,CD59,ANKRD12,MAT2B,PAIP2,ARPC5,FKBP5,HLA-DRB5,RPS27L,ARPC1B,PSMB9,PTTG1,HMGB2,WSB1,LAPTM4A,FAM177A1,ANXA5,SARAF,MIR4435-2HG,IFITM1,LYST,ATP6V1D,YPEL5,ARID5B,ARHGDIA,FABP5,IK,HLA-DPA1,SERINC3,APLP2,CHD2,ITM2B,ATXN1,RGS2,SEC11A,CD74,HMGN3,MPHOSPH8,TMEM50B,S100A4,PSAP,HBP1,DBI,H2AFZ,PPP2R5C,LEPROTL1,BTLA,TAX1BP1,KLRB1,LAMP2,CNIH4,RNASET2,CIRBP,ISG15,CHN1,ANAPC16,SLC20A1,CYTH1,MEA1",',')[[1]]
+# amr.harmony <- AddModuleScore(amr.harmony, features=list(autoreact), name='auto_reactivity', search=TRUE)
+# #Genes module H1N1
+# h1n1 <- str_split("FASLG,GZMB,CCL5,IL3,TOMM5,CSF2,TNFRSF9,CCL4,NME1,RP11-343H5.4,APOBEC3G,RP4-765C7.2,TNFSF14,CAMTA2,RP11-543P15.1,RN7SL1,RGS16,RP4-604A21.1,CARS2,TNFSF10,APOBEC3C,GCNA,FOSL1,NINJ1,IL32,GPR183,CD48,EIF2S2,XCL1,MYC,DDX21,EIF5A,EXOSC8,ACSL6,IL10,KLF10,NT5E,PMAIP1,SNHG8,SNRPGP10,IL23A,RUNX3,BMI1,CCL4L2,HSPE1,BACH2,RP11-490H24.5,SLIRP,PLEK,CCND2,PRMT1,BTG1,YBX1,NKG7,GPATCH4,NOP16,CXCR3,LINC00892,DDX18,IFNG,LYAR,PA2G4,NOLC1,PPA1,XBP1,CBWD1,UTP4,PTPRE,NUCB2,SNHG16,SYNCRIP,AC006369.2,WDR43,ANP32B,CST7,BRIX1,PHLDA1,TNFSF9,RPL26,CBFB,VTRNA1-3,TRAV8-4,EIF5B,SLC43A3,EPRS,NDFIP2,EBNA1BP2,RSL24D1,SEC61G,SRPRB,IRF8,RPL39,ABRACL,MTHFD2,DKC1,GTPBP4,FKBP11,HSP90B1,PSME2,DNTTIP2",',')[[1]]
+# amr.harmony <- AddModuleScore(amr.harmony, features=list(h1n1), name='H1N1', search=TRUE)
+# 
+# # Feature plot auto reactivity highlight top 5%
+# top95p_auto <- tail(quantile(t(amr.harmony[[paste('auto_reactivity','1',sep='')]]),seq(0,1,0.05)),2)[1]
+# top_cells <- colnames(amr.harmony)[t(amr.harmony[[paste('auto_reactivity','1',sep='')]]) > top95p_auto]
+# pt_size_set <- rep(0.01, dim(amr.harmony)[2])
+# names(pt_size_set) <- colnames(amr.harmony)
+# pt_size_set[top_cells] <- 1
+# ft_modlist_auto <-FeaturePlot(amr.harmony, features=paste('auto_reactivity','1',sep=''), label=TRUE, pt.size=pt_size_set) + scale_colour_gradientn(colours=rev(brewer.pal(n=11, name="RdBu"))) + ggtitle("Auto-reactivity module score Top50 highlight top 5%")
+# 
+# # Feature plot H1N1 highlight top 5%
+# top95p_h1n1 <- tail(quantile(t(amr.harmony[[paste('H1N1','1',sep='')]]),seq(0,1,0.05)),2)[1]
+# top_cells <- colnames(amr.harmony)[t(amr.harmony[[paste('H1N1','1',sep='')]]) > top95p_h1n1]
+# pt_size_set <- rep(0.01, dim(amr.harmony)[2])
+# names(pt_size_set) <- colnames(amr.harmony)
+# pt_size_set[top_cells] <- 1
+# ft_modlist_h1n1 <-FeaturePlot(amr.harmony, features=paste('H1N1','1',sep=''), label=TRUE, pt.size=pt_size_set) + scale_colour_gradientn(colours=rev(brewer.pal(n=11, name="RdBu"))) + ggtitle("H1N1 module score Top50 highlight top 5%")
+```
+
+MS violin
+------
+
+```{r MS_violin, echo=FALSE, message=FALSE, warning=FALSE}
+# # List module score  violin Plot pairwise wilcoxon test
+# #AutoReactivity
+# liste_auto <- amr.harmony[[c('auto_reactivity1','seurat_clusters')]]
+# names(liste_auto) <- c('mod_score','clusters')
+# pwWlcx_auto <- pairwise_wilcox_test(liste_auto,formula=mod_score ~ clusters,p.adjust.method = "BH")
+# mod_plot_auto <-  ggviolin(liste_auto, x='clusters', y='mod_score',palette=hue_pal()(10), fill='clusters') + 
+# stat_pvalue_manual(pwWlcx_auto, hide.ns = FALSE, y.position=0.5, step.increase=0.05) + ggtitle('Auto Reactivity')
+# 
+# #H1N1
+# liste_h1n1 <- amr.harmony[[c('H1N11','seurat_clusters')]]
+# names(liste_h1n1) <- c('mod_score','clusters')
+# pwWlcx_h1n1 <- pairwise_wilcox_test(liste_h1n1,formula=mod_score ~ clusters,p.adjust.method = "BH")
+# mod_plot_h1n1 <-  ggviolin(liste_h1n1, x='clusters', y='mod_score',palette=hue_pal()(10), fill='clusters') + 
+# stat_pvalue_manual(pwWlcx_h1n1, hide.ns = FALSE, y.position=0.5, step.increase=0.05) + ggtitle('H1N1')
+```
+
+Azimuth
+------
+
+```{r azimuth}
+# #Cluster annotation with azimuth, load azimuth annotation from previous run v0.4.6
+# DefaultAssay(amr.harmony) <- 'SCT'
+# Idents(amr.harmony) <- 'seurat_clusters'
+# amr.harmony <- RunAzimuth(amr.harmony, reference = "pbmcref", assay='SCT')
+# azm_plot <- DimPlot(amr.harmony, reduction='umap', split.by='predicted.celltype.l2',ncol=5,seed=42)
+```
+
+Saving
+------
+
+```{r saving}
+# saveRDS(amr.harmony,file=here::here("data/processed/AmR053_harmony_azimuth_V4regRB.rds"))
+```
+
+```{r depends-paths}
+filt_path <- here::here("data/processed/AmR053_harmony_azimuth_V4regRB.rds")
+```
+
+
+Loading `seurat` object processed
+```{r load, cache.extra = tools::md5sum(filt_path)}
+
+if (file.exists(filt_path)) {
+    amr.harmony <- readRDS(filt_path)
+} else {
+    stop("Figure 3  dataset is missing. ",
+         "Please check Input first.",
+         call. = FALSE)
+}
+```
+
+
+Figure 3
+=======
+
+Panel B
+------
+
+```{r fig3-pB, fig.width = 7, fig.height = 6}
+
+fig <- DimPlot(amr.harmony, reduction = "umap", seed=42, group.by = "seurat_clusters", pt.size = .1,ncol=1, label=TRUE) + ggtitle(paste0("seurat_clusters: ", length(amr.harmony$seurat_clusters)))
+
+dir.create(here::here("output", DOCNAME), showWarnings = FALSE)
+
+ggsave(here::here("output", DOCNAME, "figure3-panelB.pdf"), fig,
+        width = 7, height = 6, scale = 1)
+ggsave(here::here("output", DOCNAME, "figure3-panelB.png"), fig,
+        width = 7, height = 6, scale = 1)
+
+fig
+```
+
+Panel C
+------
+
+```{r fig3-pC, fig.width = 9, fig.height = 6}
+DefaultAssay(amr.harmony) <- 'SCT'
+amr.harmony.mkrs <-  FindAllMarkers(amr.harmony,assay='SCT', only.pos = TRUE, min.pct = 0.25, logfc.threshold = 0.25)
+amr.harmony.mkrs_padj <- amr.harmony.mkrs[amr.harmony.mkrs$p_val_adj <0.01 ,]
+
+list_feat<- c()
+for(clust in unique(amr.harmony.mkrs_padj$cluster)){
+  top_gene <- subset(amr.harmony.mkrs_padj,cluster==clust)$gene
+  list_feat <- c(list_feat,head(top_gene[!top_gene %in% list_feat],3))
+}
+
+DotPlot(amr.harmony, features=list_feat, cols='RdBu') + RotatedAxis() + ggtitle("Marker genes") + ylab('Clusters') +theme(axis.text.x = element_text(angle = 90, hjust=1))
+
+list_feat=c('MAL','GZMK', 'CCL5','DUSP2','HLA-DRA','LGALS1','CXCR3','HLA-DRB1','NKG7','GZMH','CST7','HIST1H1E','HIST1H1D','HIST1H1C','GNLY','GZMB','FGFBP2','FOXP3','IKZF2','RTKN2','NEAT1','XIST','MACF1','AL627171.2','PLCG2')
+
+fig <- DotPlot(amr.harmony, features=list_feat, cols='RdBu') + RotatedAxis() + ggtitle("Marker genes") + ylab('Clusters') +theme(axis.text.x = element_text(angle = 90, hjust=1))
+
+dir.create(here::here("output", DOCNAME), showWarnings = FALSE)
+
+ggsave(here::here("output", DOCNAME, "figure3-panelC.pdf"), fig,
+        width = 9, height = 6, scale = 1)
+ggsave(here::here("output", DOCNAME, "figure3-panelC.png"), fig,
+        width = 9, height = 6, scale = 1)
+
+fig
+```
+
+Panel E
+------
+
+```{r fig3-pE, fig.width = 12, fig.height = 10}
+DefaultAssay(amr.harmony) <- 'SCT'
+#Genes module autoreactivity
+my_data <- read_excel(paste0(here::here("data/processed/amR053_List_features_genes_Update_11092024.xlsx")), sheet = "autoreact", col_names = F)
+colnames(my_data) <- 'autoreact'
+amr.harmony <- AddModuleScore(amr.harmony, features=list(my_data$autoreact), name='auto_reactivity', search=TRUE)
+#Genes module H1N1
+my_data <- read_excel(paste0(here::here("data/processed/amR053_List_features_genes_Update_11092024.xlsx")), sheet = "h1n1", col_names = F)
+colnames(my_data) <- 'h1n1'
+amr.harmony <- AddModuleScore(amr.harmony, features=list(my_data$h1n1), name='H1N1', search=TRUE)
+
+# Feature plot auto reactivity highlight top 5%
+top95p_auto <- tail(quantile(t(amr.harmony[[paste('auto_reactivity','1',sep='')]]),seq(0,1,0.05)),2)[1]
+top_cells <- colnames(amr.harmony)[t(amr.harmony[[paste('auto_reactivity','1',sep='')]]) > top95p_auto]
+pt_size_set <- rep(0.01, dim(amr.harmony)[2])
+names(pt_size_set) <- colnames(amr.harmony)
+pt_size_set[top_cells] <- 1
+ft_modlist_auto <-FeaturePlot(amr.harmony, features=paste('auto_reactivity','1',sep=''), label=TRUE, pt.size=pt_size_set) + scale_colour_gradientn(colours=rev(brewer.pal(n=11, name="RdBu"))) + labs(title = "", subtitle = "Gene set score:\nauto-reactivity") + theme(plot.subtitle = element_text(size = 12))
+#ft_modlist_auto
+
+# Feature plot H1N1 highlight top 5%
+top95p_h1n1 <- tail(quantile(t(amr.harmony[[paste('H1N1','1',sep='')]]),seq(0,1,0.05)),2)[1]
+top_cells <- colnames(amr.harmony)[t(amr.harmony[[paste('H1N1','1',sep='')]]) > top95p_h1n1]
+pt_size_set <- rep(0.01, dim(amr.harmony)[2])
+names(pt_size_set) <- colnames(amr.harmony)
+pt_size_set[top_cells] <- 1
+ft_modlist_h1n1 <- FeaturePlot(amr.harmony, features=paste('H1N1','1',sep=''), label=TRUE, pt.size=pt_size_set) + scale_colour_gradientn(colours=rev(brewer.pal(n=11, name="RdBu"))) + labs(title = "", subtitle = "Gene set score:\nH1N1") +
+  theme(plot.subtitle = element_text(size = 12))
+#ft_modlist_h1n1
+
+# List module score  violin Plot pairwise wilcoxon test
+#AutoReactivity
+liste_auto <- amr.harmony[[c('auto_reactivity1','seurat_clusters')]]
+names(liste_auto) <- c('mod_score','clusters')
+pwWlcx_auto <- pairwise_wilcox_test(liste_auto,formula=mod_score ~ clusters,p.adjust.method = "BH")
+pwWlcx_auto_f =  pwWlcx_auto[pwWlcx_auto$group1 %in% c(2,6)| pwWlcx_auto$group2 %in% c(2,6), ]
+
+mod_plot_auto <-  ggviolin(liste_auto, x='clusters', y='mod_score',palette=hue_pal()(10), fill='clusters') + 
+stat_pvalue_manual(pwWlcx_auto_f, hide.ns = FALSE, y.position=0.5, step.increase=0.05) + ggtitle('Auto Reactivity')+ theme(legend.position = 'none') + xlab("scRNA-seq clusters") + ylab("Gene set score")
+
+#H1N1
+liste_h1n1 <- amr.harmony[[c('H1N11','seurat_clusters')]]
+names(liste_h1n1) <- c('mod_score','clusters')
+pwWlcx_h1n1 <- pairwise_wilcox_test(liste_h1n1,formula=mod_score ~ clusters,p.adjust.method = "BH")
+pwWlcx_h1n1_f =  pwWlcx_h1n1[pwWlcx_h1n1$group1 %in% c(3,5)| pwWlcx_h1n1$group2 %in% c(3,5), ]
+
+
+mod_plot_h1n1 <-  ggviolin(liste_h1n1, x='clusters', y='mod_score',palette=hue_pal()(10), fill='clusters') + 
+stat_pvalue_manual(pwWlcx_h1n1_f, hide.ns = FALSE, y.position=0.5, step.increase=0.05) + ggtitle('H1N1') + theme(legend.position = 'none') + xlab("scRNA-seq clusters") + ylab("Gene set score")
+
+
+fig <- plot_grid(ft_modlist_auto,ft_modlist_h1n1, mod_plot_auto, mod_plot_h1n1,  nrow = 2, labels = "E")
+
+dir.create(here::here("output", DOCNAME), showWarnings = FALSE)
+
+ggsave(here::here("output", DOCNAME, "figure3-panelE.pdf"), fig,
+        width = 12, height = 10, scale = 1)
+ggsave(here::here("output", DOCNAME, "figure3-panelE.png"), fig,
+        width = 12, height = 10, scale = 1)
+
+fig
+```
+
+Supplementary figure 10
+=======
+
+```{r suppfig10, fig.width = 9, fig.height = 10}
+
+#Indentify marker genes for each cluster
+amr.harmony.mkrs_padj %>% group_by(cluster) %>% top_n(n = 5, wt = avg_log2FC) -> top5
+
+#amr.harmony.mkrs_padj %>% group_by(cluster) %>% top_n(n = 5, wt = avg_log2FC) -> top5
+#heatmap.mkrs <- DoHeatmap(amr.harmony, features=top5$gene, group.by='seurat_clusters')
+
+
+
+# fig <- DoHeatmap(amr.harmony, features=top5$gene, group.by='seurat_clusters', assay = 'SCT', label = F)
+# more than 30k cells, https://github.com/satijalab/seurat/issues/2724
+DoHeatmap(subset(amr.harmony, downsample = 5000), 
+          features=top5$gene,  group.by='seurat_clusters',
+                  assay = "SCT")
+
+fig <- DoHeatmap(subset(amr.harmony, downsample = 5000), 
+          features=list_feat,  group.by='seurat_clusters',
+                  assay = "SCT")
+
+
+dir.create(here::here("output", DOCNAME), showWarnings = FALSE)
+
+ggsave(here::here("output", DOCNAME, "suppfigure10.pdf"), fig,
+        width = 9, height = 10, scale = 1)
+ggsave(here::here("output", DOCNAME, "suppfigure10.png"), fig,
+        width = 9, height = 10, scale = 1)
+
+fig
+```
+
+Supplementary figure 11
+=======
+
+```{r suppfig11, fig.width = 10, fig.height = 9}
+Idents(amr.harmony) <- 'predicted.celltype.l2'
+fig <- DimPlot(amr.harmony, split.by='predicted.celltype.l2',ncol=4,seed=42)
+
+dir.create(here::here("output", DOCNAME), showWarnings = FALSE)
+
+ggsave(here::here("output", DOCNAME, "suppfigure11.pdf"), fig,
+        width = 10, height = 9, scale = 1)
+ggsave(here::here("output", DOCNAME, "suppfigure11.png"), fig,
+        width = 10, height = 9, scale = 1)
+
+fig
+```
+
+
+Supplementary figure 12
+=======
+
+```{r suppfig12, fig.width = 12, fig.height = 10}
+ft_modlist = list()
+mod_plot_list = list()
+for (sname in c("Poon_2022_Lung_CD4_TRM","Poon_2022_Skin_CD4_TRM","Poon_2022_jejunum_CD4_TRM", 
+                "Zhang_2022_Liver_HBV_CXCL13_CD4", "Zheng_2017_Liver_HCC_CXCL13_CD4", "Argyriou_2022_Synovial_TPH", "Law_2024_Synovial_TPH")){
+  
+#Genes module 
+my_data <- read_excel(paste0(here::here("data/processed/amR053_List_features_genes_Update_11092024.xlsx")), sheet = sname, col_names = F)
+colnames(my_data) <- sname
+amr.harmony <- AddModuleScore(amr.harmony, features=list(my_data[[sname]]), name= sname, search=TRUE)
+
+# Feature plot highlight top 5%
+top95p <- tail(quantile(t(amr.harmony[[paste(sname,'1',sep='')]]),seq(0,1,0.05)),2)[1]
+top_cells <- colnames(amr.harmony)[t(amr.harmony[[paste(sname,'1',sep='')]]) > top95p]
+pt_size_set <- rep(0.01, dim(amr.harmony)[2])
+names(pt_size_set) <- colnames(amr.harmony)
+pt_size_set[top_cells] <- 1
+ft_modlist[[sname]] <-FeaturePlot(amr.harmony, features=paste(sname,'1',sep=''), pt.size=pt_size_set) + scale_colour_gradientn(colours=rev(brewer.pal(n=11, name="RdBu"))) + labs(title = "", subtitle = paste0("Gene set score:\n",sname)) + theme(plot.subtitle = element_text(size = 12)) & NoLegend() & NoAxes()
+
+
+# List module score  violin Plot pairwise wilcoxon test
+liste_tempo <- amr.harmony[[c(paste(sname,'1',sep=''),'seurat_clusters')]]
+names(liste_tempo) <- c('mod_score','clusters')
+pwWlcx_auto <- pairwise_wilcox_test(liste_tempo,formula=mod_score ~ clusters,p.adjust.method = "BH")
+pwWlcx_auto_f =  pwWlcx_auto[pwWlcx_auto$group1 %in% c(2,6)| pwWlcx_auto$group2 %in% c(2,6), ]
+
+mod_plot_list[[sname]] <-  ggviolin(liste_tempo, x='clusters', y='mod_score',palette=hue_pal()(10), fill='clusters') + 
+stat_pvalue_manual(pwWlcx_auto_f, hide.ns = FALSE, y.position=0.5, step.increase=0.05) + ggtitle(sname)+ theme(legend.position = 'none') + xlab("scRNA-seq clusters") + ylab("Gene set score")
+
+}
+
+fig <- plot_grid(mod_plot_list[[1]], ft_modlist[[1]],
+                 mod_plot_list[[2]], ft_modlist[[2]],
+                 mod_plot_list[[3]], ft_modlist[[3]],
+                 mod_plot_list[[4]], ft_modlist[[4]],
+                 mod_plot_list[[5]], ft_modlist[[5]],
+                 mod_plot_list[[6]], ft_modlist[[6]],
+                 mod_plot_list[[7]], ft_modlist[[7]],
+                 nrow = 3, labels = "A")
+
+dir.create(here::here("output", DOCNAME), showWarnings = FALSE)
+
+ggsave(here::here("output", DOCNAME, "suppfigure12.pdf"), fig,
+        width = 18, height = 12, scale = 1)
+ggsave(here::here("output", DOCNAME, "suppfigure12.png"), fig,
+        width = 18, height = 12, scale = 1)
+
+fig
+```
+
+
+Output files
+==============
+
+This table describes the output files produced by this document. Right click
+and _Save Link As..._ to download the results.
+
+```{r save}
+saveRDS(amr.harmony, here::here("data/processed/05-sc_seurat.rds"))
+
+```
+
+
+```{r output}
+dir.create(here::here("output", DOCNAME), showWarnings = FALSE)
+
+knitr::kable(data.frame(
+     File = c(
+         getDownloadLink2("figure3-panelB.png", str_sub(here::here("output", DOCNAME),2,-1)),
+         getDownloadLink2("figure3-panelB.pdf", str_sub(here::here("output", DOCNAME),2,-1)),
+         getDownloadLink2("figure3-panelC.png", str_sub(here::here("output", DOCNAME),2,-1)),
+         getDownloadLink2("figure3-panelC.pdf", str_sub(here::here("output", DOCNAME),2,-1)),
+         getDownloadLink2("figure3-panelE.png", str_sub(here::here("output", DOCNAME),2,-1)),
+         getDownloadLink2("figure3-panelE.pdf", str_sub(here::here("output", DOCNAME),2,-1)),
+         getDownloadLink2("suppfigure10.png", str_sub(here::here("output", DOCNAME),2,-1)),
+         getDownloadLink2("suppfigure10.pdf", str_sub(here::here("output", DOCNAME),2,-1)),
+         getDownloadLink2("suppfigure11.png", str_sub(here::here("output", DOCNAME),2,-1)), 
+         getDownloadLink2("suppfigure11.pdf", str_sub(here::here("output", DOCNAME),2,-1)),
+         getDownloadLink2("suppfigure12.png", str_sub(here::here("output", DOCNAME),2,-1)), # bug one "/" plus
+         getDownloadLink2("suppfigure12.pdf", str_sub(here::here("output", DOCNAME),2,-1))
+     ),
+     Description = c(
+         "Figure 3 panel B (PNG)",
+         "Figure 3 panel B (PDF)",
+         "Figure 3 panel C (PNG)",
+         "Figure 3 panel C (PDF)",
+         "Figure 3 panel E (PNG)",
+         "Figure 3 panel E (PDF)",
+         "Supplementary Figure 10 (PNG)",
+         "Supplementary Figure 10 (PDF)",
+         "Supplementary Figure 11 (PNG)",
+         "Supplementary Figure 11 (PDF)",
+         "Supplementary Figure 12 (PNG)",
+         "Supplementary Figure 12 (PDF)"
+     )
+ ))
+```
+
+
+Session information
+==============
+
+```{r session-info, cache = FALSE}
+devtools::session_info()
+```
